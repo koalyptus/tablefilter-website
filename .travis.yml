@@ -21,3 +21,4 @@ deploy:
   region: $AWS_DEFAULT_REGION
   bucket: www.tablefilter.com
   skip_cleanup: true
+  local_dir: dist
