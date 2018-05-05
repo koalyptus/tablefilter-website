@@ -1,0 +1,112 @@
+---
+title: Alphabetical pager
+heading: 'Alphabetical pager'
+section: 'examples-advanced'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This example shows how to easily implement an alphabetical paging component
+    by simply using the <code>start with</code> operator
+</p>
+
+<div class="row pagination" data-config>
+    <button class="btn" value="" onclick="filter(event);">All</button>
+    <button class="btn" value="A" onclick="filter(event);">A</button>
+    <button class="btn" value="B" onclick="filter(event);">B</button>
+    <button class="btn" value="C" onclick="filter(event);">C</button>
+    <button class="btn" value="D" onclick="filter(event);">D</button>
+    <button class="btn" value="E" onclick="filter(event);">E</button>
+    <button class="btn" value="F" onclick="filter(event);">F</button>
+    <button class="btn" value="G" onclick="filter(event);">G</button>
+    <button class="btn" value="H" onclick="filter(event);">H</button>
+    <button class="btn" value="I" onclick="filter(event);">I</button>
+    <button class="btn" value="J" onclick="filter(event);">J</button>
+    <button class="btn" value="K" onclick="filter(event);">K</button>
+    <button class="btn" value="L" onclick="filter(event);">L</button>
+    <button class="btn" value="M" onclick="filter(event);">M</button>
+    <button class="btn" value="N" onclick="filter(event);">N</button>
+    <button class="btn" value="O" onclick="filter(event);">O</button>
+    <button class="btn" value="P" onclick="filter(event);">P</button>
+    <button class="btn" value="Q" onclick="filter(event);">Q</button>
+    <button class="btn" value="R" onclick="filter(event);">R</button>
+    <button class="btn" value="S" onclick="filter(event);">S</button>
+    <button class="btn" value="T" onclick="filter(event);">T</button>
+    <button class="btn" value="U" onclick="filter(event);">U</button>
+    <button class="btn" value="V" onclick="filter(event);">V</button>
+    <button class="btn" value="W" onclick="filter(event);">W</button>
+    <button class="btn" value="X" onclick="filter(event);">X</button>
+    <button class="btn" value="Y" onclick="filter(event);">Y</button>
+    <button class="btn" value="Z" onclick="filter(event);">Z</button>
+</div>
+
+{{> countries-codes }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    // filter by first letter logic
+    function filter(evt){
+        var elm = evt.target;
+        var query = elm.value.length > 0 ? tf.stOperator + elm.value : '';
+
+        // set the column's filter value
+        tf.setFilterValue(1, query);
+
+        // filter the table
+        tf.filter();
+
+        // clear previously marked element
+        if(tf.selectedLetter) {
+            tf.selectedLetter.classList.remove('btn-primary');
+        }
+
+        // mark selected letter
+        elm.classList.add('btn-primary');
+
+        // keep reference of selected element
+        tf.selectedLetter = elm;
+    }
+
+    var tf = new TableFilter(
+        document.querySelector('#countries-codes'),
+        {
+            base_path: 'tablefilter/',
+            start_with_operator: '←',
+            paging: {
+              length: 10
+            },
+            rows_counter: {
+                text: 'Countries: '
+            },
+            col_types: [
+              'string', 'string', 'string',
+              'string', 'number'
+            ],
+            col_widths: [
+                '75px','350px','350px',
+                '75px','75px'
+            ],
+
+            // hide filters
+            on_filters_loaded: function(tf) {
+                tf.dom().rows[tf.getFiltersRowIndex()].style.display = 'none';
+            },
+
+            // sorting feature
+            extensions: [{
+                name: 'sort'
+            }]
+        }
+    );
+    tf.init();
+    // keep reference of selected letter element
+    tf.selectedLetter = null;
+</script>
+
+{{> code-tabs }}
+
+<div class="alert alert-info" role="alert">
+    NOTE: Toolbar above the HTML table is styled with Bootstrap.
+</div>

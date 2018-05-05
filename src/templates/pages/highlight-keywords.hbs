@@ -1,0 +1,25 @@
+---
+title: Highlight keywords
+heading: 'Highlight keywords'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Use the <code>highlight_keywords</code> option to highlight the matched
+    search terms.
+</p>
+
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        highlight_keywords: true
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

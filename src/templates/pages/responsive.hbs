@@ -1,0 +1,31 @@
+---
+title: Responsive table
+heading: 'Responsive table'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Easily turn your tabular data into a responsive data table with the
+    <code>responsive</code> option.
+</p>
+
+<div class="alert alert-info" role="alert">
+  Instructions: resize the browser's window or choose a device in the browser's
+  developer tools.
+</div>
+
+{{> countries-table-tiny }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+      base_path: 'tablefilter/',
+      responsive: true
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}
+

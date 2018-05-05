@@ -1,0 +1,77 @@
+---
+title: Using Bootstrap
+heading: 'Using Bootstrap'
+section: 'examples-custom'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to configure TableFilter to integrate with Bootstrap.
+</p>
+
+<div class="alert alert-info" role="alert">
+Assuming your project is <a href="http://getbootstrap.com/">Bootstrap</a>
+enabled, follow the following steps to take advantage of Bootstrap styling:
+<ol>
+    <li>
+        Add the <code>table</code> CSS class to the working HTML table
+    </li>
+    <li>
+        Use TableFilter's <code>tranparent</code> theme* to allow
+        Bootstrap's table styling
+    </li>
+</ol>
+* Available starting from TableFilter v0.4.12
+</div>
+
+{{> bootstrap-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+        mark_active_columns: {
+            highlight_column: true
+        },
+        highlight_keywords: true,
+        no_results_message: true,
+        col_0: 'checklist',
+        col_1: 'select',
+        col_2: 'multiple',
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        col_widths: [
+            '180px', '120px', '120px',
+            '100px', '100px', '100px',
+            '100px', '100px', '100px'
+        ],
+        extensions: [{
+            name: 'sort'
+        }],
+
+        /** Bootstrap integration */
+
+        // aligns filter at cell bottom when Bootstrap is enabled
+        filters_cell_tag: 'th',
+
+        // allows Bootstrap table styling
+        themes: [{
+            name: 'transparent'
+        }]
+    };
+
+    var tf = new TableFilter(document.querySelector('.table'), tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

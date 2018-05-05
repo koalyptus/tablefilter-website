@@ -1,0 +1,72 @@
+---
+title: Custom column filtering
+heading: 'Custom column filtering'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    Use the <code>cell_parser</code> delegate to retrieve cells values with
+    custom logic. Filters will be populated with the value returned by the
+    <code>cell_parser</code> function.
+</p>
+
+{{> dummy-table-select-columns }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+var tfConfig = {
+    base_path: 'tablefilter/',
+    col_0: 'select',
+    col_9: 'select',
+    filters_row_index: 1,
+    alternate_rows: true,
+    rows_counter: true,
+    btn_reset: {
+        text: 'Clear'
+    },
+    loader: true,
+    col_types: [
+        'none',
+        'string',
+        'number',
+        'string',
+        { type: 'formatted-number', decimal: ',', thousands: '.' },
+        'formatted-number',
+        'string',
+        { type: 'date', locale: 'en-GB' },
+        'date',
+        'none'
+    ],
+
+    /* custom filtering with cell_parser delegate */
+    cell_parser: {
+        cols: [0, 9],
+        parse: function(o, cell, colIndex){
+            if(colIndex === 0){
+                var chk = cell.getElementsByTagName('input')[0];
+                if(chk.checked) return 'active';
+                else return 'inactive';
+            } else {
+                var slc = cell.getElementsByTagName('select')[0];
+                if(!slc){
+                    return 'none';
+                } else {
+                    return slc.value;
+                }
+            }
+        }
+    },
+
+    /* Column sorting extension */
+    extensions: [{
+        name: 'sort'
+    }]
+};
+var tf = new TableFilter('demo', tfConfig);
+tf.init();
+</script>
+
+{{> code-tabs }}

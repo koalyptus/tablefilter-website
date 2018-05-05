@@ -1,0 +1,272 @@
+---
+title: Column calculations
+heading: 'Column calculations'
+section: 'examples-extension'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This example shows how to configure the <code>colOps</code> extension to
+    enable column calculations. The extension currently supports:
+    <code>sum</code>, <code>mean</code>, <code>median</code>,  <code>min</code>,
+    <code>max</code>, <code>lower quartile</code>, <code>upper quartile</code>.
+</p>
+
+{{> calc-table }}
+
+<div data-config>
+    <table class="TF">
+        <thead>
+            <tr>
+                <th width="185">Period</th>
+                <th width="45">Junk</th>
+                <th width="45">A</th>
+                <th width="45">B</th>
+                <th width="45">C</th>
+                <th width="45">D</th>
+                <th width="45">E</th>
+                <th width="45">F</th>
+                <th width="45">G</th>
+                <th width="45">H</th>
+                <th width="45">I</th>
+                <th width="45">J</th>
+                <th width="45">K</th>
+                <th width="45">L</th>
+                <th width="45">M</th>
+                <th width="45">QTD</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sum of Displayed rows</td>
+                <td id="demosum1" ></td>
+                <td id="demosum2" ></td>
+                <td id="demosum3" ></td>
+                <td id="demosum4" ></td>
+                <td id="demosum5" ></td>
+                <td id="demosum6" ></td>
+                <td id="demosum7" ></td>
+                <td id="demosum8"  ></td>
+                <td id="demosum9" ></td>
+                <td id="demosum10" ></td>
+                <td id="demosum11" ></td>
+                <td id="demosum12" ></td>
+                <td id="demosum13" ></td>
+                <td id="demosum14" ></td>
+                <td id="demosum15" ></td>
+            </tr>
+            <tr>
+                <td>Mean of Displayed rows</td>
+                <td id="demomean1"></td>
+                <td id="demomean2"></td>
+                <td id="demomean3"></td>
+                <td id="demomean4"></td>
+                <td id="demomean5"></td>
+                <td id="demomean6"></td>
+                <td id="demomean7"></td>
+                <td id="demomean8"></td>
+                <td id="demomean9"></td>
+                <td id="demomean10"></td>
+                <td id="demomean11"></td>
+                <td id="demomean12"></td>
+                <td id="demomean13"></td>
+                <td id="demomean14"></td>
+                <td id="demomean15"></td>
+            </tr>
+            <tr>
+                <td>Min of Displayed rows</td>
+                <td id="demomin1"></td>
+                <td id="demomin2"></td>
+                <td id="demomin3"></td>
+                <td id="demomin4"></td>
+                <td id="demomin5"></td>
+                <td id="demomin6"></td>
+                <td id="demomin7"></td>
+                <td id="demomin8"></td>
+                <td id="demomin9"></td>
+                <td id="demomin10"></td>
+                <td id="demomin11"></td>
+                <td id="demomin12"></td>
+                <td id="demomin13"></td>
+                <td id="demomin14"></td>
+                <td id="demomin15"></td>
+            </tr>
+            <tr>
+                <td>Lower Quartile of Displayed rows</td>
+                <td id="demoLQ1"></td>
+                <td id="demoLQ2"></td>
+                <td id="demoLQ3"></td>
+                <td id="demoLQ4"></td>
+                <td id="demoLQ5"></td>
+                <td id="demoLQ6"></td>
+                <td id="demoLQ7"></td>
+                <td id="demoLQ8"></td>
+                <td id="demoLQ9"></td>
+                <td id="demoLQ10"></td>
+                <td id="demoLQ11"></td>
+                <td id="demoLQ12"></td>
+                <td id="demoLQ13"></td>
+                <td id="demoLQ14"></td>
+                <td id="demoLQ15"></td>
+            </tr>
+            <tr>
+                <td>Median of Displayed rows</td>
+                <td id="demoMed1"></td>
+                <td id="demoMed2"></td>
+                <td id="demoMed3"></td>
+                <td id="demoMed4"></td>
+                <td id="demoMed5"></td>
+                <td id="demoMed6"></td>
+                <td id="demoMed7"></td>
+                <td id="demoMed8"></td>
+                <td id="demoMed9"></td>
+                <td id="demoMed10"></td>
+                <td id="demoMed11"></td>
+                <td id="demoMed12"></td>
+                <td id="demoMed13"></td>
+                <td id="demoMed14"></td>
+                <td id="demoMed15"></td>
+            </tr>
+            <tr>
+                <td>Upper Quartile of Displayed rows</td>
+                <td id="demoUQ1"></td>
+                <td id="demoUQ2"></td>
+                <td id="demoUQ3"></td>
+                <td id="demoUQ4"></td>
+                <td id="demoUQ5"></td>
+                <td id="demoUQ6"></td>
+                <td id="demoUQ7"></td>
+                <td id="demoUQ8"></td>
+                <td id="demoUQ9"></td>
+                <td id="demoUQ10"></td>
+                <td id="demoUQ11"></td>
+                <td id="demoUQ12"></td>
+                <td id="demoUQ13"></td>
+                <td id="demoUQ14"></td>
+                <td id="demoUQ15"></td>
+            </tr>
+            <tr>
+                <td>Max of Displayed rows</td>
+                <td id="demomax1"></td>
+                <td id="demomax2"></td>
+                <td id="demomax3"></td>
+                <td id="demomax4"></td>
+                <td id="demomax5"></td>
+                <td id="demomax6"></td>
+                <td id="demomax7"></td>
+                <td id="demomax8"></td>
+                <td id="demomax9"></td>
+                <td id="demomax10"></td>
+                <td id="demomax11"></td>
+                <td id="demomax12"></td>
+                <td id="demomax13"></td>
+                <td id="demomax14"></td>
+                <td id="demomax15"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter(
+        document.querySelector('#calc-demo'),
+        {
+            base_path: 'tablefilter/',
+            alternate_rows: true,
+            rows_counter: {
+                text: 'Items: '
+            },
+            btn_reset: true,
+            status_bar: true,
+            col_types: [
+                'none', 'string', 'number',
+                'number', 'number', 'number',
+                'number', 'number', 'number',
+                'number', 'number', 'number',
+                'number', 'number', 'number',
+                'number'
+            ],
+            sort_select: true,
+            col_1: 'select',
+
+            // extensions: sort and column operations
+            extensions: [
+                {
+                    name: 'sort'
+                }, {
+                    name: 'colOps',
+                    id: [
+                        'demosum2', 'demomean2', 'demomin2', 'demoLQ2', 'demoMed2', 'demoUQ2', 'demomax2',
+                        'demosum3', 'demomean3', 'demomin3', 'demoLQ3', 'demoMed3', 'demoUQ3', 'demomax3',
+                        'demosum4', 'demomean4', 'demomin4', 'demoLQ4', 'demoMed4', 'demoUQ4', 'demomax4',
+                        'demosum5', 'demomean5', 'demomin5', 'demoLQ5', 'demoMed5', 'demoUQ5', 'demomax5',
+                        'demosum6', 'demomean6', 'demomin6', 'demoLQ6', 'demoMed6', 'demoUQ6', 'demomax6',
+                        'demosum7', 'demomean7', 'demomin7', 'demoLQ7', 'demoMed7', 'demoUQ7', 'demomax7',
+                        'demosum8', 'demomean8', 'demomin8', 'demoLQ8', 'demoMed8', 'demoUQ8', 'demomax8',
+                        'demosum9', 'demomean9', 'demomin9', 'demoLQ9', 'demoMed9', 'demoUQ9', 'demomax9',
+                        'demosum10', 'demomean10', 'demomin10', 'demoLQ10', 'demoMed10', 'demoUQ10', 'demomax10',
+                        'demosum11', 'demomean11', 'demomin11', 'demoLQ11', 'demoMed11', 'demoUQ11', 'demomax11',
+                        'demosum12', 'demomean12', 'demomin12', 'demoLQ12', 'demoMed12', 'demoUQ12', 'demomax12',
+                        'demosum13', 'demomean13', 'demomin13', 'demoLQ13', 'demoMed13', 'demoUQ13', 'demomax13',
+                        'demosum14', 'demomean14', 'demomin14', 'demoLQ14', 'demoMed14', 'demoUQ14', 'demomax14',
+                        'demosum15', 'demomean15', 'demomin15', 'demoLQ15', 'demoMed15', 'demoUQ15', 'demomax15'
+                    ],
+                    col: [
+                        2, 2, 2, 2, 2, 2, 2,
+                        3, 3, 3, 3, 3, 3, 3,
+                        4, 4, 4, 4, 4, 4, 4,
+                        5, 5, 5, 5, 5, 5, 5,
+                        6, 6, 6, 6, 6, 6, 6,
+                        7, 7, 7, 7, 7, 7, 7,
+                        8, 8, 8, 8, 8, 8, 8,
+                        9, 9, 9, 9, 9, 9, 9,
+                        10, 10, 10, 10, 10, 10, 10,
+                        11, 11, 11, 11, 11, 11, 11,
+                        12, 12, 12, 12, 12, 12, 12,
+                        13, 13, 13, 13, 13, 13, 13,
+                        14, 14, 14, 14, 14, 14, 14,
+                        15, 15, 15, 15, 15, 15, 15
+                    ],
+                    operation: [
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max',
+                        'sum', 'mean', 'min', 'Q1', 'median', 'Q3', 'max'
+                    ],
+                    decimal_precision: [
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1
+                    ]
+                }
+            ]
+        }
+    );
+    tf.init();
+</script>
+
+{{> code-tabs }}

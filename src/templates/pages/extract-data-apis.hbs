@@ -1,0 +1,240 @@
+---
+title: Extracting data APIs
+heading: 'APIs for extracting data'
+section: 'examples-api'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    This demo features some of the APIs available for extracting data from the
+    working table.
+</p>
+
+<div class="alert alert-warning" role="alert">
+    Instructions: filter a column before trying a button out as some of
+    the commands require the table to be filtered.
+</div>
+
+<div class="panel panel-info pull-left">
+    <div class="panel-heading">APIs</div>
+    <div class="panel-body bg-info" data-config>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getFiltersValue());">
+                Filters values
+            </button>
+
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getFiltersValue()</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getData());">
+                Table data
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getData()</code>
+        </p>
+        <hr>
+
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getValues());">
+                Table values
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getValues()</code>
+        </p>
+        <hr>
+
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getFilteredData());">
+                Table filtered data
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getFilteredData()</code>
+        </p>
+        <hr>
+
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getFilteredValues());">
+                Table filtered values
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getFilteredValues()</code>
+        </p>
+        <hr>
+
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getColumnData(0));">
+                Country column data
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getColumnData(columnIndex)</code>
+        </p>
+        <hr>
+
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getColumnValues(0));">
+                Country column values
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getColumnValues(columnIndex)</code>
+        </p>
+        <hr>
+
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getFilteredColumnData(0));">
+                Country column filtered data
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getFilteredColumnData(columnIndex)</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getFilteredColumnValues(0));">
+                Country column filtered values
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getFilteredColumnValues(columnIndex)</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getValidRows());">
+                Valid rows indexes
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getValidRows()</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getHeadersText());">
+                Headers text
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getHeadersText()</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getStartRowIndex());">
+                First filterable row index
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getStartRowIndex()</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getLastRowIndex());">
+                Last filterable row index
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getLastRowIndex()</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getFiltersRowIndex());">
+                Filters row index
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getFiltersRowIndex()</code>
+        </p>
+        <hr>
+        <p>
+            <button class="btn btn-default"
+                onclick="
+                    alert(tf.getHeadersRowIndex());">
+                Headers row index
+            </button>
+        </p>
+        <p>
+            <span class="badge">API</span>:
+            <code>getHeadersRowIndex()</code>
+        </p>
+    </div>
+</div>
+
+<div class="pull-left" style="margin-left: 0.5em; width: 50%;">
+    {{> countries-table-tiny }}
+</div>
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        alternate_rows: true,
+        rows_counter: {
+            text: 'Records: '
+        },
+        btn_reset: true,
+        loader: true,
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+
+        /* sorting feature */
+        extensions: [{ name: 'sort' }]
+    };
+    var tf = new TableFilter('demo', tfConfig);
+    tf.init();
+</script>
+
+<p class="clearfix"></p>
+
+{{> code-tabs }}

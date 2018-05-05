@@ -1,0 +1,45 @@
+---
+title: Linked filters
+heading: 'Linked filters'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    This demo features the linked filters behaviour. In this mode, the drop-down
+    filters are linked, that is, when a column is filtered only the valid values
+    of the other columns are included in their respective filters.
+</p>
+
+{{> countries-by-continent }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var filtersConfig = {
+        base_path: 'tablefilter/',
+        linked_filters: true,
+        col_1: 'multiple',
+        col_2: 'checklist',
+        btn_reset: true,
+        clear_filter_text: '< Clear >',
+        alternate_rows: true,
+        rows_counter: true,
+        enable_default_theme: true,
+        col_widths: [
+            '75px', '150px', '200px',
+            '100px', '100px', '350px'
+        ],
+        col_types: [
+            'number', 'string', 'string',
+            'formatted-number', 'number', 'none'
+        ],
+        extensions:[{
+            name: 'sort'
+        }]
+    };
+    var tf = new TableFilter('demo', filtersConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

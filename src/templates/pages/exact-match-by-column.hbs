@@ -1,0 +1,33 @@
+---
+title: Exact match by column
+heading: 'Exact match by column'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Exact match filtering can be also defined on a column basis with the
+    <code>columns_exact_match</code> option.
+</p>
+
+<div class="alert alert-info" role="alert">
+    In the first column, search for <code>syd</code> and then for
+    <code>sydney</code>. Now, try <code>bris</code> in the second column.
+</div>
+
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        columns_exact_match: [true, false, true, false, true]
+    });
+    tf.init();
+</script>
+
+<p>
+    {{> pre-inline-script }}
+</p>
+

@@ -1,0 +1,25 @@
+---
+title: Single filter
+heading: 'Single filter'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Use the <code>single_filter</code> option to generate a single
+    <code>input</code> filter type filtering all the columns of the table.
+</p>
+
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        single_filter: true
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

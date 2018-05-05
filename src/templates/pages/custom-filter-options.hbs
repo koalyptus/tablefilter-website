@@ -1,0 +1,74 @@
+---
+title: Custom filter options
+heading: 'Custom filter options'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to use the <code>custom_options</code> option to assign
+    custom options to a <code>select</code> filter type.
+</p>
+
+{{> countries-table }}
+
+{{> tablefilter-script }}
+
+<p><p>
+
+<div class="alert alert-danger" role="alert">
+    Known limitation: <code>multiple</code> and <code>checklist</code> filter
+    types currently do not support the <code>custom_options</code>
+    functionality.
+</div>
+
+<script data-config>
+    var filtersConfig = {
+        base_path: 'tablefilter/',
+        col_1: 'select',
+        col_2: 'select',
+        col_3: 'select',
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        loader: true,
+        status_bar: true,
+        no_results_message: true,
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        custom_options: {
+            cols:[3],
+            texts: [
+                [
+                    'na', '0 - 50', '50 - 500',
+                    '500 - 15 000', '15 000 - 25 000', '25 000 - 100 000',
+                    '100 000 - 1 500 000', 'not na'
+                ]
+            ],
+            values: [
+                [
+                    'na', '>0 && <=50', '>50 && <=500',
+                    '>500 && <=15000', '>15000 && <=25000',
+                    '>25000 && <=100000', '>100000 && <=1500000', '!na'
+                ]
+            ],
+            sorts: [false]
+        },
+        col_widths: [
+            '150px', '100px', '100px',
+            '70px', '70px', '70px',
+            '70px', '60px', '60px'
+        ],
+        extensions:[{
+            name: 'sort'
+        }]
+    };
+    var tf = new TableFilter('demo', filtersConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

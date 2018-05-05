@@ -1,0 +1,149 @@
+---
+title: Add an extension at runtime
+heading: 'Add an extension at runtime'
+section: 'examples-advanced'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This example shows how to add an extension at runtime.
+</p>
+
+<div class="alert alert-warning" role="alert">
+    Instructions: filter a column, change a page or sort a column to see actions
+    logged in the logging box.
+</div>
+
+{{> countries-codes }}
+
+{{> tablefilter-script }}
+
+<br>
+
+<div data-config>
+    <button onclick="tf.destroy()">Remove TableFilter</button>
+    <button onclick="tf.init()">Reset TableFilter</button>
+</div>
+
+<br>
+<pre class="console"></pre>
+
+<script data-config>
+
+    /**
+     * MyExtension class
+     * Implements an interface exposing a `init` and `destroy` methods, called
+     * when TableFilter instance is initialiazed or destroyed.
+     *
+     * @param {TableFilter} tf TableFilter instance
+     */
+    function MyExtension(tf) {
+        this.tf = tf;
+        this.container = document.querySelector('.console');
+    }
+
+    MyExtension.prototype.init = function() {
+        var tf = this.tf;
+
+        // subscribe to events
+        tf.emitter.on(['after-filtering'], this.afterFiltering.bind(this));
+        tf.emitter.on(['after-page-change'], this.pageChanged.bind(this));
+        tf.emitter.on(['after-clearing-filters'], this.filtersCleared.bind(this));
+        tf.emitter.on(['column-sorted'], this.columnSorted.bind(this));
+
+        this.log('MyExtension initialized');
+    };
+
+    MyExtension.prototype.log = function(msg) {
+        if(msg.length === 0) {
+            return;
+        }
+        this.container.innerHTML += msg + '\n';
+    };
+
+    MyExtension.prototype.afterFiltering = function(tf, terms) {
+        var msg = [];
+        terms.forEach(function(term, idx){
+            if(term.trim() !== '') {
+                msg.push(
+                    'Searched for `' + term + '` in `' +
+                    tf.getHeadersText()[idx] + '` column'
+                );
+            }
+        });
+        this.log(msg);
+    };
+
+    MyExtension.prototype.pageChanged = function(tf, pageNb) {
+        this.log('Selected page: ' + pageNb);
+    };
+
+    MyExtension.prototype.filtersCleared = function(tf) {
+        this.log('Filters cleared');
+    };
+
+    MyExtension.prototype.columnSorted = function(tf, columnIndex, descending) {
+        this.log(
+            'Sorted column `' + tf.getHeadersText()[columnIndex] + '` in ' +
+            ( descending ? 'descending ' : 'ascending') + ' manner'
+        );
+    };
+
+    MyExtension.prototype.destroy = function() {
+        var tf = this.tf;
+        tf.emitter.off(['after-filtering'], this.afterFiltering.bind(this));
+        tf.emitter.off(['after-page-change'], this.pageChanged.bind(this));
+        tf.emitter.off(['after-clearing-filters'], this.filtersCleared.bind(this));
+        tf.emitter.off(['column-sorted'], this.columnSorted.bind(this));
+
+        this.log('MyExtension destroyed');
+    }
+    /**  MyExtension END */
+
+
+    /** TableFilter configuration and instantiation */
+    var tf = new TableFilter(
+        document.querySelector('#countries-codes'),
+        {
+            base_path: 'tablefilter/',
+            paging: true,
+            rows_counter: {
+              text: 'Countries: '
+            },
+            btn_reset: true,
+            loader: true,
+            alternate_rows: true,
+            mark_active_columns: true,
+            col_types: [
+              'string', 'string', 'string',
+              'string', 'number'
+            ],
+            col_widths: [
+                '75px','350px','350px',
+                '75px','75px'
+            ],
+
+            // sorting feature
+            extensions: [{ name: 'sort' }]
+        }
+    );
+
+    // subcribe to an event emitted just before the required extensions are loaded
+    tf.emitter.on(['before-loading-extensions'], addMyExtension);
+
+    tf.init();
+
+    // manually add a custom extension instance to the extensions registry
+    function addMyExtension(tf) {
+        var myExtension = new MyExtension(tf);
+        tf.registerExtension(myExtension, 'myExtension');
+
+        myExtension.init();
+    }
+
+
+</script>
+
+{{> code-tabs }}
+

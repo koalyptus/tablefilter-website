@@ -1,0 +1,36 @@
+---
+title: Filter types
+heading: 'Filter types'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows all the type of filters currently available.
+    <code>TableFilter</code> adds by default the <code>input</code> filter type
+    to all the columns.
+</p>
+
+{{> countries-table-tiny }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var filtersConfig = {
+        base_path: 'tablefilter/',
+        col_0: 'checklist',
+        col_1: 'select',
+        col_2: 'multiple',
+        col_8: 'none',
+        col_widths: [
+            '180px', '120px', '120px',
+            '100px', '100px', '100px',
+            '100px', '100px', '100px'
+        ]
+    };
+    var tf = new TableFilter('demo', filtersConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

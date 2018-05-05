@@ -1,0 +1,43 @@
+---
+title: Load filters on demand
+heading: 'Load filters on demand'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    Drop-down type filter options are loaded only when used the first time.
+</p>
+
+<div class="alert alert-info" role="alert">
+    Instructions: click on a drop-down type filter to load its options.
+</div>
+
+{{> countries-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        col_widths: [
+            "180px", "120px", "120px",
+            null, null, null,
+            null, null, null
+        ],
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        status_bar: true,
+        paging: true,
+        load_filters_on_demand: true,
+        col_0: 'multiple',
+        col_1: 'select',
+        col_2: 'checklist'
+    };
+    var tf = new TableFilter('demo', tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

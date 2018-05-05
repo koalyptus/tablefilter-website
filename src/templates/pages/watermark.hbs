@@ -1,0 +1,25 @@
+---
+title: Watermark
+heading: 'Filter watermark'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Use the <code>watermark</code> option to set a short hint in a
+    <code>input</code> filter type.
+</p>
+
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        watermark: ['City', 'City', 'Distance', 'Time', 'Time']
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

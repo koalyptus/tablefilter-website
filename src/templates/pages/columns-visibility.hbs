@@ -1,0 +1,60 @@
+---
+title: Columns visibility extension
+heading: 'Columns visibility extension'
+section: 'examples-extension'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    This demo features the columns visibility extension. This feature allows
+    users to toggle the visibility of a desired column.
+</p>
+
+<div data-config>
+  <p>
+    <button onclick="javascript:
+        tf.extension('colsVisibility').hideCol(0);">Hide Column 0</button>
+    <button onclick="javascript:
+        tf.extension('colsVisibility').showCol(0);">Show Column 0</button>
+    <button onclick="javascript:
+        tf.extension('colsVisibility').toggleCol(2);">Toggle Column 2</button>
+  </p>
+</div>
+
+{{> countries-by-continent }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        paging: true,
+        state: { types: ['cookie'] },
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: {
+            text: 'Clear'
+        },
+        status_bar: true,
+        col_1: 'select',
+        col_2: 'select',
+        col_types: [
+            'number', 'string', 'string',
+            'formatted-number', 'formatted-number', 'string'
+        ],
+
+        /* columns visibility and sort extension */
+        extensions: [{
+              name: 'colsVisibility',
+              at_start: [3, 5],
+              text: 'Columns: ',
+              enable_tick_all: true
+          }, {
+              name: 'sort'
+        }]
+    };
+    var tf = new TableFilter('demo', tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

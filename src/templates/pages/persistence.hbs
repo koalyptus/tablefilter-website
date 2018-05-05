@@ -1,0 +1,96 @@
+---
+title: Persistence
+heading: 'Persistence'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    Features state can be persisted across page loads with the
+    <code>state</code> option. The following features can currently be
+    persisted:
+    <ul>
+      <li>filters' values</li>
+      <li>page number when <code>paging</code> in on</li>
+      <li>page length when <code>paging</code> in on</li>
+      <li>sorted column when <code>sort</code> extension is enabled</li>
+      <li>
+        hidden columns when <code>colsVisibility</code> extension is
+        enabled
+      </li>
+      <li>
+        filters visibility when <code>filtersVisibility</code> extension is
+        enabled
+      </li>
+    </ul>
+</p>
+
+
+<div class="btn-group" data-config>
+  <span id="fltsBtn"></span>
+  <span id="colsBtn"></span>
+</div>
+
+{{> countries-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var filtersConfig = {
+        base_path: 'tablefilter/',
+        state: {
+          types: ['local_storage'],
+          filters: true,
+          page_number: true,
+          page_length: true,
+          sort: true,
+          columns_visibility: true,
+          filters_visibility: true
+        },
+        paging: {
+          results_per_page: ['Records: ', [10, 25, 50, 100]]
+        },
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+        col_0: 'multiple',
+        col_1: 'select',
+        col_2: 'checklist',
+        col_widths: [
+            '180px', '120px', '120px',
+            '100px', '100px', '100px',
+            '100px', '100px', '100px'
+        ],
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        extensions:[{
+            name: 'sort'
+          }, {
+            name: 'colsVisibility',
+            text: 'Hide columns:',
+            enable_tick_all: true,
+            btn_target_id: 'colsBtn'
+        }, {
+            name: 'filtersVisibility',
+            target_id: 'fltsBtn'
+        }]
+    };
+    var tf = new TableFilter('demo', filtersConfig);
+    tf.init();
+</script>
+
+<p></p>
+
+<div class="alert alert-info" role="info">
+  The <code>types</code> property in <code>state</code> object accepts the
+  following values: <code>'hash'</code>, <code>'local_storage'</code> and
+  <code>'cookie'</code>.
+</div>
+
+{{> code-tabs }}

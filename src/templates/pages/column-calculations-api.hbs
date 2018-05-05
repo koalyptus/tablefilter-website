@@ -1,0 +1,148 @@
+---
+title: Column calculations with API
+heading: 'Column calculations with API'
+section: 'examples-api'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This example shows how to get advantage of the <code>ColOps</code> API to
+    perform desired calculations on a specified column. Pagination is turned on
+    to specifically show the difference between visible filtered data and
+    filtered data (the filtered data displayed on current page vs filtered dataset).
+</p>
+
+<div class="alert alert-warning" role="alert">
+    Instructions: filter or sort a column, change a page to see calculation
+    results for the <code>Total</code> column.
+</div>
+
+<div style="font-size:1.2em;" data-config>
+    <p>Visible data:<br>
+        <code>Sum:</code> <span id="vis-sum" class="badge"></span>
+        <code>Mean:</code> <span id="vis-mean" class="badge"></span>
+        <code>Median:</code> <span id="vis-median" class="badge"></span>
+        <code>Min:</code> <span id="vis-min" class="badge"></span>
+        <code>max:</code> <span id="vis-max" class="badge"></span>
+    </p>
+
+    <p>Filtered data:<br>
+        <code>Sum:</code> <span id="flt-sum" class="badge"></span>
+        <code>Mean:</code> <span id="flt-mean" class="badge"></span>
+        <code>Median:</code> <span id="flt-median" class="badge"></span>
+        <code>Min:</code> <span id="flt-min" class="badge"></span>
+        <code>max:</code> <span id="flt-max" class="badge"></span>
+    </p>
+</div>
+
+{{> dummy-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        paging: true,
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        loader: true,
+        status_bar: true,
+        locale: 'en-US',
+        col_types: [
+            'string', 'number', 'string',
+            'formatted-number', 'string', 'date'
+        ],
+
+        // extensions: sort and column operations
+        extensions: [
+          { name: 'sort' },
+          {
+              // minimal configuration for column operation extension
+              name: 'colOps',
+              col: [3]
+          }
+        ]
+    };
+
+    var tf = new TableFilter('demo', tfConfig);
+
+    // subscribe to 'column-calc' event emitted whenever a calculation is
+    // performed on a column
+    tf.emitter.on(['column-calc'], calcAll);
+
+    tf.init();
+
+    /**
+     * Perform all calculations
+     * @param  {Object} tf       TableFilter instance
+     * @param  {Object} colOps   ColOps extension instance
+     * @param  {Number} colIndex Column index
+     */
+    function calcAll(tf, colOps, colIndex) {
+        calc(tf, colOps, colIndex, 'sum', true, 'vis-sum');
+        calc(tf, colOps, colIndex, 'sum', false, 'flt-sum');
+
+        calc(tf, colOps, colIndex, 'mean', true, 'vis-mean');
+        calc(tf, colOps, colIndex, 'mean', false, 'flt-mean');
+
+        calc(tf, colOps, colIndex, 'median', true, 'vis-median');
+        calc(tf, colOps, colIndex, 'median', false, 'flt-median');
+
+        calc(tf, colOps, colIndex, 'min', true, 'vis-min');
+        calc(tf, colOps, colIndex, 'min', false, 'flt-min');
+
+        calc(tf, colOps, colIndex, 'max', true, 'vis-max');
+        calc(tf, colOps, colIndex, 'max', false, 'flt-max');
+    }
+
+    /**
+     * Perform a specified calculation on a column and display result
+     * @param  {Object}  tf          TableFilter instance
+     * @param  {Object}  colOps      ColOps extension instance
+     * @param  {Number}  colIndex    Column index
+     * @param  {String}  operation   Calculation to be performed ('sum', 'mean', 'median'...)
+     * @param  {Boolean} onlyVisible Perform calculation on only visible data as opposed to filtered data
+     * @param  {String}  labelId     Id of DOM element displaying calculation result
+     */
+    function calc(tf, colOps, colIndex, operation, onlyVisible, labelId) {
+
+        /** getFilteredDataCol accepts in order of appearance:
+            - a column index
+            - an optional boolean indicating whether the returned dataset also includes the colunm header
+            - an optional boolean indicating whether the returned dataset should return numbers (string by default)
+            - an optional array of row indexes to be excluded from the returned dataset
+            - an optional boolean indicating whether the returned dataset should only include filtered and
+            visible data (true by default) or filtered only (paging can contain filtered data which is not visible)
+            Refer to: http://koalyptus.github.io/TableFilter/docs/class/src/tablefilter.js~TableFilter.html#instance-method-getFilteredDataCol
+        */
+        var colValues = tf.getFilteredDataCol(colIndex, false, true, [], onlyVisible);
+        var result = 0;
+
+        // Refer to ColOps API to perform desired calculations
+        // http://koalyptus.github.io/TableFilter/docs/class/src/extensions/colOps/colOps.js~ColOps.html
+        if(operation === 'sum') {
+            result = colOps.calcSum(colValues);
+        }
+        else if(operation === 'mean') {
+            result = colOps.calcMean(colValues) || 0;
+        }
+        else if(operation === 'median') {
+            result = colOps.calcMedian(colValues) || 0;
+        }
+        else if(operation === 'min') {
+            let calc = colOps.calcMin(colValues);
+            result = isFinite(calc) ? calc : 0;
+        }
+        else if(operation === 'max') {
+            let calc = colOps.calcMax(colValues);
+            result = isFinite(calc) ? calc : 0;
+        }
+
+        // display result
+        document.getElementById(labelId).innerHTML = result.toFixed(2);
+    }
+</script>
+
+{{> code-tabs }}

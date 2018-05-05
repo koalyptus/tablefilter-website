@@ -1,0 +1,39 @@
+---
+title: Filters visibility extension
+heading: 'Filters visibility extension'
+section: 'examples-extension'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    This demo features the filters visibility extension.
+</p>
+
+{{> countries-by-continent }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        col_1: 'multiple',
+        col_widths: [
+            '75px', '200px', '120px',
+            '100px', '75px', '350px'
+        ],
+        paging: true,
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        loader: true,
+        status_bar: true,
+        extensions: [{
+            name: 'filtersVisibility',
+            visible_at_start: false
+        }]
+    };
+    var tf = new TableFilter('demo', tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

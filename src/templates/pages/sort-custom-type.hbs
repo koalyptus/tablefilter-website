@@ -1,0 +1,95 @@
+---
+title: Sort a custom column type
+heading: 'Sort a custom column type'
+section: 'examples-api'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to implement your own sorter for a custom column type.
+    The <code>sort</code> extension provides a public interface for implementing
+    custom sorter functions.
+</p>
+
+{{> dummy-table-with-custom-type }}
+
+{{> tablefilter-script }}
+
+<div class="alert alert-info" role="alert">
+    The <code>addSortType</code> method accepts the following paremeters:
+    <ul>
+        <li>
+            an identifier of the sort type (lowercase)
+        </li>
+        <li>
+            an optional function that takes a string and casts it to a desired
+            format, if not specified it returns the string itself
+        </li>
+        <li>
+            an optional compare function taking 2 values and compares them. If
+            not specified defaults to `less than compare` type
+        </li>
+    </ul>
+</div>
+
+<script data-config>
+    // Cast to integer contained in string
+    function customCaster(val) {
+        var m = val.match(/\d+/);
+        return parseInt(m[0], 10);
+    }
+
+    // Custom sorter
+    function customSorter(n1, n2) {
+        if(n1.value < n2.value) {
+            return -1;
+        }
+        if(n2.value < n1.value) {
+            return 1;
+        }
+        return 0;
+    }
+
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        status_bar: true,
+        col_types: [
+            'string',
+            'customtype',
+            'number',
+            'string',
+            { type: 'formatted-number', decimal: ',', thousands: '.' },
+            'formatted-number',
+            'string',
+            { type: 'date', locale: 'fr' },
+            { type: 'date', locale: 'en' }
+        ],
+
+        // Sort extension
+        extensions: [{
+            name: 'sort',
+
+            // Register custom sorter when sort extension is loaded
+            on_sort_loaded: function(o, sort) {
+                // addSortType accepts:
+                // 1. an identifier of the sort type (lowercase)
+                // 2. an optional function that takes a string and casts it to a
+                // desired format, if not specified it returns the string
+                // 3. an optional compare function taking 2 values and compares
+                // them. If not specified defaults to `less than compare` type
+                sort.addSortType('customtype', customCaster, customSorter);
+            }
+        }]
+    };
+    var tf = new TableFilter(
+        document.querySelector('.dummy-custom-type'),
+        tfConfig
+    );
+    tf.init();
+</script>
+
+{{> code-tabs }}

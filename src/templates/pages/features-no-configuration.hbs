@@ -1,0 +1,94 @@
+---
+title: Enable features without configuration
+heading: 'Enable features without configuration'
+section: 'examples-api'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This example shows how to enable features without using any configuration
+    options.
+</p>
+
+{{> countries-codes }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+
+    var tf = new TableFilter(document.querySelector('#countries-codes'));
+
+    // filter types
+    tf.filterTypes = ['multiple', 'checklist', 'input', 'input', 'input'];
+
+    // columns widths
+    tf.colWidths = ['70px', '250px', '250px', '100px', '100px'];
+
+    // loading indicator
+    tf.loader = true;
+    var loader = tf.feature('loader');
+    loader.html = '<div id="lblStatus"></div>';
+    loader.enable();
+
+    // status messages
+    tf.statusBar = true;
+    var statusBar = tf.feature('statusBar');
+    statusBar.targetId = 'lblStatus';
+    statusBar.enable();
+
+    // pagination
+    tf.paging = true;
+    var paging = tf.feature('paging');
+    paging.pageLength = 15;
+    paging.enable();
+
+    // rows counter
+    tf.rowsCounter = true;
+    var rowsCounter = tf.feature('rowsCounter');
+    rowsCounter.enable();
+
+    // alternating backgrounds
+    tf.alternateRows = true;
+    var alternateRows = tf.feature('alternateRows');
+    alternateRows.enable();
+
+    // filtered column indicator
+    tf.markActiveColumns = true;
+    var markActiveColumns = tf.feature('markActiveColumns');
+    markActiveColumns.enable();
+
+    // matched words highlighting
+    tf.highlightKeywords = true;
+    var highlightKeyword = tf.feature('highlightKeyword');
+
+    // no results message
+    tf.noResults = true;
+    var noResults = tf.feature('noResults');
+    noResults.enable();
+
+    // clear filters button
+    tf.btnReset = true;
+    var clearButton = tf.feature('clearButton');
+    clearButton.enable();
+
+    // persist filters state with url hash
+    tf.state = true;
+    var state = tf.feature('state');
+    state.enableHash = true;
+    state.enable();
+
+    // extensions: column sorting, filters toggle, columns toggle
+    tf.extensions = [{
+        name: 'sort'
+      }, {
+        name: 'filtersVisibility'
+      }, {
+      name: 'colsVisibility'
+    }];
+
+    tf.init();
+
+</script>
+
+{{> code-tabs }}

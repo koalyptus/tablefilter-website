@@ -1,0 +1,97 @@
+---
+title: Filter and sort column with images
+heading: 'Filter and sort column with images'
+section: 'examples-advanced'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to filter and sort a column containing images by using
+    the <code>cell_parser</code> delegate and by defining the
+    <code>data-tf-sortKey</code> custom DOM attribute.
+</p>
+
+<div class="alert alert-info" role="alert">
+    <code>TableFilter</code> automatically detects the presence of the
+    <code>data-tf-sortKey</code> attibute in a cell. If the <code>sort</code>
+    extension is enabled the sort mechanism will sort that column based on the
+    value specified in the <code>data-tf-sortKey</code> attibute.
+</div>
+
+<div data-config>
+  {{> books-with-images }}
+</div>
+
+{{> tablefilter-script }}
+
+<script data-config>
+var tfConfig = {
+    base_path: './tablefilter/',
+    filters_row_index: 2,
+    headers_row_index: 1,
+    col_types: [
+        'string', 'string', 'string',
+        'number', 'string', 'string', 'date'
+    ],
+    rows_counter: {
+        text: 'Books: '
+    },
+    alternate_rows: true,
+    btn_reset: true,
+
+    /* filter types*/
+    col_0: 'select',
+    col_4: 'select',
+    col_5: 'select',
+
+    /* cell_parser delegate used for filtering images in a column */
+    cell_parser: {
+        cols: [0, 4],
+        parse: function(o, cell, colIndex){
+            if(colIndex === 0){
+                var img = cell.getElementsByTagName('img')[0];
+                if(!img){
+                    return '';
+                }
+                return img.alt;
+            } else if(colIndex === 4){
+                var chk = cell.getElementsByTagName('input')[0];
+                if(chk.checked){
+                    return 'yes';
+                } else {
+                    return 'no';
+                }
+            }
+        }
+    },
+
+    /* Custom options for 'Shipping' column */
+    custom_options: {
+        cols: [5],
+        texts: [
+            [
+                '1 Hour', '12 Hours', '24 Hours',
+                '2 Days', 'na'
+            ]
+        ],
+        values: [
+            [
+                '1 Hour', '12 Hours', '24 Hours',
+                '2 Days', 'na'
+            ]
+        ],
+        sorts: [false]
+    },
+
+    /* SkyBlue theme */
+    themes: [{ name: 'skyblue'}],
+
+    /* Sorting feature */
+    extensions: [{ name: 'sort' }]
+};
+var tf = new TableFilter('demo', 2, tfConfig);
+tf.init();
+</script>
+
+{{> code-tabs }}

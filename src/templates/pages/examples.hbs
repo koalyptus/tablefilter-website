@@ -1,0 +1,124 @@
+---
+title: Examples
+heading: 'Examples'
+navbar: 'true'
+---
+
+<h1>{{heading}}</h1>
+
+<p>
+    Browse the following examples to see <code>TableFilter</code> in action.
+    This library takes HTML tables to a whole new level :)
+</p>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Basic</div>
+                <div class="list-group">
+                {{#withSort pages "data.title"}}
+                  {{#is data.section "examples-basic"}}
+                    <a class="list-group-item" href="{{relative dest this.dest}}">{{data.title}}</a>
+                  {{/is}}
+                {{/withSort}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Features</div>
+                <div class="list-group">
+                {{#withSort pages "data.title"}}
+                  {{#is data.section "examples"}}
+                    <a class="list-group-item" href="{{relative dest this.dest}}">{{data.title}}</a>
+                  {{/is}}
+                {{/withSort}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Extensions</div>
+                <div class="list-group">
+                {{#withSort pages "data.title"}}
+                  {{#is data.section "examples-extension"}}
+                    <a class="list-group-item" href="{{relative dest this.dest}}">{{data.title}}</a>
+                  {{/is}}
+                {{/withSort}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">API</div>
+                <div class="list-group">
+                {{#withSort pages "data.title"}}
+                  {{#is data.section "examples-api"}}
+                    <a class="list-group-item" href="{{relative dest this.dest}}">{{data.title}}</a>
+                  {{/is}}
+                {{/withSort}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Customisation — Styling</div>
+                <div class="list-group">
+                {{#withSort pages "data.title"}}
+                  {{#is data.section "examples-custom"}}
+                    <a class="list-group-item" href="{{relative dest this.dest}}">{{data.title}}</a>
+                  {{/is}}
+                {{/withSort}}
+                </div>
+            </div>
+        </div>
+         <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Advanced</div>
+                <div class="list-group">
+                {{#withSort pages "data.title"}}
+                  {{#is data.section "examples-advanced"}}
+                    <a class="list-group-item" href="{{relative dest this.dest}}">{{data.title}}</a>
+                  {{/is}}
+                {{/withSort}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Usage</h2>
+<h3>Global</h3>
+<p>
+    Import the main js file in your page, from desired location or for example
+    from the default NPM location if you downloaded the package from NPM:
+</p>
+<pre>&lt;script src=&quot;node_modules/tablefilter/dist/tablefilter/tablefilter.js&quot;&gt;&lt;/script&gt;</pre>
+<p>
+    This will expose the <code>TableFilter</code> global function as shown in
+    example below.
+</p>
+
+<!-- CODEPEN -->
+<p data-height="446" data-theme-id="0" data-slug-hash="wKBOLp" data-default-tab="result" data-user="koalyptus" class='codepen'>See the Pen <a href='http://codepen.io/koalyptus/pen/wKBOLp/'>TableFilter starter</a> by Max (<a href='http://codepen.io/koalyptus'>@koalyptus</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h3>Module</h3>
+<p>
+    <code>TableFilter</code> can also be imported as a module and used in those
+    projects following a module pattern as AMD or CommonJS:
+    <div class="list-group">
+      <a href="https://bitbucket.org/mguglielmi/tablefilter-webpack/src/" class="list-group-item">
+          Setup with Webpack
+      </a>
+      <a href="setup-systemjs.html" class="list-group-item">
+          Setup with SystemJS
+      </a>
+      <a href="setup-requirejs.html" class="list-group-item">
+          Setup with RequireJS
+      </a>
+    </div>
+</p>

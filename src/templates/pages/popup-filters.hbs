@@ -1,0 +1,51 @@
+---
+title: Pop-up filters
+heading: 'Pop-up filters'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo features the pop-up filter type enabled by the
+    <code>popup_filters</code> option.
+</p>
+
+{{> countries-table-tiny }}
+
+<p></p>
+
+<div class="alert alert-info" role="alert">
+    NOTE: the <code>filters_row_index</code> configuration option is ignored
+    when <code>popup_filters</code> is on as the filter elements are generated
+    in the headers row
+</div>
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var filtersConfig = {
+        base_path: 'tablefilter/',
+        col_1: 'select',
+        col_2: 'checklist',
+        col_8: 'none',
+        popup_filters: true,
+        auto_filter: {
+            delay: 1100 //milliseconds
+        },
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        status_bar: true,
+        msg_filter: 'Filtering...',
+        col_widths:[
+            '125px', '90px', '100px',
+            '90px', '90px', '90px',
+            '90px', '90px', '90px'
+        ]
+    };
+    var tf = new TableFilter('demo', filtersConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

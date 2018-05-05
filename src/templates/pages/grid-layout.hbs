@@ -1,0 +1,61 @@
+---
+title: Grid layout
+heading: 'Grid layout'
+section: 'examples'
+---
+<div data-config>
+<link rel="stylesheet" type="text/css" href="tablefilter/style/tablefilter.css">
+</div>
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demos shows how to generate a grid control from a regular html table by
+    simply activating the <code>grid_layout</code> option.
+</p>
+
+{{> countries-table }}
+
+<p></p>
+
+<div class="alert alert-warning" role="alert">
+    <code>TableFilter</code> imports the required stylesheets dynamically.
+    However, if you use <code>grid_layout</code>, it is recommended to
+    import at least the main stylesheet in your page: <br>
+    <code>
+&lt;link rel="stylesheet" type="text/css" href="{your path to tablefilter}/style/tablefilter.css" /&gt;
+    </code>
+</div>
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var filtersConfig = {
+        base_path: 'tablefilter/',
+        grid_layout: true,
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+        col_1: 'select',
+        col_2: 'select',
+        col_widths: [
+            "150px", "70px", "70px",
+            "120px", "120px", "100px",
+            "100px", "100px", "100px"
+        ],
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        extensions:[{
+            name: 'sort'
+        }]
+    };
+    var tf = new TableFilter('demo', filtersConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

@@ -1,0 +1,33 @@
+---
+title: Ignore diacritics by column
+heading: 'Ignore diacritics by column'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    You can also ignore diacritics on a column basis with the
+    <code>ignore_diacritics</code> option.
+</p>
+
+<div class="alert alert-info" role="alert">
+    In the first column, search for <code>falo</code> and then for
+    <code>falò</code>. Now, try <code>bru</code> in the second column.
+</div>
+
+{{> diacritics }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        ignore_diacritics: [false, true, false]
+    });
+    tf.init();
+</script>
+
+<p>
+    {{> pre-inline-script }}
+</p>
+

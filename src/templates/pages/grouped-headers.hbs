@@ -1,0 +1,83 @@
+---
+title: Grouped headers
+heading: 'Grouped headers'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    With grouped and/or multi-line headers, you will need to use the following
+    configuration options to place the filters in the appropriate row:
+</p>
+<ul>
+    <li>
+        <code>filters_row_index</code> to set the position of the filters'
+        row
+    </li>
+    <li>
+        <code>headers_row_index</code> to specify the position of the
+        headers row - especially when the sort feature is enabled
+    </li>
+</ul>
+<p>
+    and equally important, specify the index of the row from which the filtering
+    process should start ie:
+    <code>var tf = new TableFilter('myTableId', myConfig, 3);</code>
+</p>
+
+{{> grouped-headers-table }}
+
+{{> tablefilter-script }}
+
+<p><p>
+
+<div class="alert alert-danger" role="alert">
+    Known limitation: grid layout mode (<code>grid_layout</code> configuration
+    option) currently does not support grouped and/or multi-line headers.
+</div>
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        // filter types
+        col_0: "multiple",
+        col_1: "select",
+        col_2: "checklist",
+
+        // column types
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+
+        // filters and headers position
+        filters_row_index: 3,
+        headers_row_index: 2,
+
+        state: { types: ['local_storage']},
+        highlight_keywords: true,
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        status_bar: true,
+        paging: {
+          length: 15
+        },
+        enable_empty_option: true,
+        enable_non_empty_option: true,
+
+        // theme
+        themes: [{ name: 'skyblue' }],
+
+        // sorting extension
+        extensions: [{ name: 'sort' }]
+    };
+    var tf = new TableFilter('grouped-headers', tfConfig, 3);
+    tf.init();
+</script>
+
+<p></p>
+
+{{> code-tabs }}

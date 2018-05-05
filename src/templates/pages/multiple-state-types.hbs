@@ -1,0 +1,69 @@
+---
+title: State with multiple types
+heading: 'State with multiple types'
+section: ''
+---
+
+<h1>{{ heading }}</h1>
+
+
+{{> bootstrap-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        col_0: 'checklist',
+        col_1: 'select',
+        col_2: 'multiple',
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+        no_results_message: true,
+        paging: true,
+        state: {
+            types: ['hash', 'local_storage'],
+            filters: true,
+            page_number: true,
+            page_length: true,
+            sort: true,
+            columns_visibility: true,
+            filters_visibility: true
+        },
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        col_widths: [
+            '180px', '120px', '120px',
+            '100px', '100px', '100px',
+            '100px', '100px', '100px'
+        ],
+        extensions: [{
+            name: 'sort'
+        }, {
+            name: 'filtersVisibility'
+        }, {
+            name: 'colsVisibility'
+        }],
+
+        /** Bootstrap integration */
+
+        // aligns filter at cell bottom when Bootstrap is enabled
+        filters_cell_tag: 'th',
+
+        // allows Bootstrap table styling
+        themes: [{
+            name: 'transparent'
+        }]
+    };
+
+    var tf = new TableFilter(document.querySelector('.table'), tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

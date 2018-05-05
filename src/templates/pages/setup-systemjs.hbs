@@ -1,0 +1,39 @@
+---
+title: Setup SystemJS
+heading: 'Setup with SystemJS'
+section: 'examples-setup'
+---
+
+<h1>{{heading}}</h1>
+
+<p>
+    For projects using a module pattern, this example shows how to load
+    the <code>TableFilter</code> module with SystemJS.
+</p>
+
+{{> cities-table }}
+
+<!-- SystemJS -->
+<div data-config>
+  <script src="https://jspm.io/system@0.19.js"></script>
+</div>
+
+<script data-config>
+// SystemJS example
+System.import('./tablefilter/tablefilter').then(function(mod) {
+    var TableFilter = mod.TableFilter;
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true
+    };
+    var tf = new TableFilter(
+        document.querySelector('.cities'),
+        tfConfig
+    );
+    tf.init();
+});
+</script>
+
+{{> code-tabs }}

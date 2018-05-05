@@ -1,0 +1,66 @@
+---
+title: Single filter, exclude columns
+heading: 'Single filter, exclude columns'
+section: 'examples'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to configure a single filter searching on desired
+    columns.
+</p>
+
+{{> bootstrap-table }}
+
+<div class="alert alert-info" role="alert">
+  NOTE: this demo uses Bootstrap.
+</div>
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+        no_results_message: true,
+        single_filter: {
+            exclude_cols: [3, 4, 5, 6, 7, 8],
+            css_class: 'form-control',
+        },
+        watermark: 'Search Country, ISO or Year',
+        auto_filter: true,
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        col_widths: [
+            '180px', '120px', '120px',
+            '100px', '100px', '100px',
+            '100px', '100px', '100px'
+        ],
+        extensions: [{
+            name: 'sort'
+        }],
+
+        /** Bootstrap integration */
+
+        // aligns filter at cell bottom when Bootstrap is enabled
+        filters_cell_tag: 'th',
+
+        // allows Bootstrap table styling
+        themes: [{
+            name: 'transparent'
+        }]
+    };
+
+    var tf = new TableFilter(document.querySelector('.table'), tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

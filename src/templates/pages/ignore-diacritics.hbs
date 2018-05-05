@@ -1,0 +1,30 @@
+---
+title: Ignore diacritics
+heading: 'Ignore diacritics'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    With the <code>ignore_diacritics</code> option you can perform searches by
+    ignoring the diacritics.
+</p>
+
+<div class="alert alert-info" role="alert">
+    Search for <code>jero</code> or <code>bru</code> and then for
+    <code>Zoë</code> in the <code>contact</code> column.
+</div>
+
+{{> diacritics }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        ignore_diacritics: true
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

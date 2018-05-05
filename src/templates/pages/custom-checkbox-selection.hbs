@@ -1,0 +1,167 @@
+---
+title: Custom checkbox selection
+heading: 'Custom checkbox selection'
+section: 'examples-advanced'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to implement a custom checkbox selection by using the
+    <code>TableFilter</code>'s API.
+</p>
+
+<div data-config>
+
+  <p>
+    <button class="btn btn-default" onclick="alert(selectedRows);">
+      Selected rows indexes</button>
+  </p>
+
+  {{> countries-table-checkboxes }}
+
+</div>
+
+{{> tablefilter-script }}
+
+<style data-config>
+
+  .selected{
+    background-color: #316AC5;
+    color: #FFFFFF;
+  }
+
+</style>
+
+<script data-config>
+    var tfConfig = {
+      base_path: 'tablefilter/',
+      col_0: 'none',
+      col_1: 'multiple',
+      col_3: 'checklist',
+      auto_filter: {
+          delay: 500 //milliseconds
+      },
+      alternate_rows: true,
+      rows_counter: {
+          text: 'Records: '
+      },
+      btn_reset: true,
+      status_bar: true,
+      msg_filter: 'Filtering...',
+      col_widths: [
+        '10px', '150px', '75px',
+        '100px', null, null, null,
+        null, null, null
+      ]
+    };
+
+    var tf = new TableFilter(
+      document.querySelector('.countries-checkboxes'),
+      tfConfig
+    );
+
+    // Subscribe to 'initialized' event to initialize selection
+    tf.emitter.on(['initialized'], initSelectionListeners);
+
+    tf.init();
+
+    // Store selected rows indexes
+    var selectedRows = [];
+
+    var selectedCss = 'selected';
+
+    // Initialize checkboxes listeners
+    function initSelectionListeners(tf){
+      var headerCheckbox = tf.getHeaderElement(0).querySelector('input');
+      var checkboxes = getBodyCheckboxes(tf.dom());
+
+      // Add event listener to checkbox in table head
+      headerCheckbox.addEventListener('change', toggleAll.bind(tf));
+
+      // Add event listener to all checkboxes in table body
+      [].forEach.call(checkboxes, function(checkbox){
+        checkbox.addEventListener('change', changeHandler);
+      });
+    }
+
+    // Toggle all checkboxes in valid rows
+    function toggleAll(evt){
+      var tf = this;
+      var headerCheckbox = evt.target;
+      var isChecked = headerCheckbox.checked;
+      var checkboxes = getBodyCheckboxes(tf.dom());
+      var filteredRows = tf.getValidRows();
+
+      [].forEach.call(checkboxes, function(checkbox){
+        var row = getRowElement(checkbox);
+        var rowIndex = row.rowIndex;
+        if(isChecked){
+          if(filteredRows.indexOf(rowIndex) !== -1){
+            checkbox.checked = true;
+            selectRow(selectedRows, row, selectedCss);
+          }
+        } else {
+          checkbox.checked = false;
+          deselectRow(selectedRows, row, selectedCss)
+        }
+      });
+    }
+
+    // Checkbox change event handler
+    function changeHandler(evt){
+      var checkbox = evt.target;
+      var row = getRowElement(checkbox);
+      var isChecked = checkbox.checked;
+
+      if(isChecked){
+        selectRow(selectedRows, row, selectedCss);
+      } else {
+        deselectRow(selectedRows, row, selectedCss);
+      }
+    }
+
+    // Select row
+    function selectRow(selectedRows, row, cssClass){
+      row.classList.add(cssClass);
+      storeRowIndex(selectedRows, row.rowIndex);
+    }
+
+    // Deselect row
+    function deselectRow(selectedRows, row, cssClass){
+      row.classList.remove(cssClass);
+      removeRowIndex(selectedRows, row.rowIndex);
+    }
+
+    // Store selected row index
+    function storeRowIndex(selectedRows, rowIndex){
+      if(selectedRows.indexOf(rowIndex) === -1){
+        selectedRows.push(rowIndex);
+      }
+    }
+
+    // Remove row index previously selected
+    function removeRowIndex(selectedRows, rowIndex){
+      selectedRows.splice(selectedRows.indexOf(rowIndex), 1);
+    }
+
+    // Get all checkboxes in table body
+    function getBodyCheckboxes(table){
+      var tBody = table.tBodies[0];
+      return tBody.getElementsByTagName('input');
+    }
+
+    // Get the parent row element
+    function getRowElement(element){
+      while(element !== null){
+        if(element.nodeName === 'TR'){
+          return element;
+        }
+        element = element.parentNode;
+      }
+      return null;
+    }
+
+</script>
+
+{{> code-tabs }}

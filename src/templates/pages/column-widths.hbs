@@ -1,0 +1,30 @@
+---
+title: Column widths
+heading: 'Column widths'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Set the column widths with the <code>col_widths</code> options.
+</p>
+<div class="alert alert-info" role="alert">
+    <p>
+        <code>col_widths</code> accepts the different units used for expressing
+        a length in CSS, ie <code>%, em, pt, rem</code>. It also accepts the
+        <code>null</code> value.
+    </p>
+</div>
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        col_widths: ['200px', '200px', '160px', '105px', '105px']
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

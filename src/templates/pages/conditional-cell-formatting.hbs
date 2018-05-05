@@ -1,0 +1,82 @@
+---
+title: Conditional cell formatting
+heading: 'Conditional cell formatting'
+section: 'examples-advanced'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to conditionally format a cell by subscribing
+    to <code>TableFilter</code> events.
+</p>
+
+{{> countries-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+        paging: true,
+        col_0: 'select',
+        col_1: 'select',
+        col_2: 'select',
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        extensions:[{
+            name: 'sort'
+        }]
+    };
+    var tf = new TableFilter(document.querySelector('#demo'), tfConfig);
+
+    // Subscribe to events
+    // Format cell at initialization
+    tf.emitter.on(['initialized'], parseRows);
+    // Format cell upon filtering
+    tf.emitter.on(['cell-processed'], formatCell);
+
+    tf.init();
+
+    // Process all rows on start-up
+    function parseRows(tf){
+        var cellIndex = 3; // POP column
+        var rowsIdx = tf.getValidRows();
+        rowsIdx.forEach(function(idx){
+            var row = tf.dom().rows[idx];
+            var cell = row.cells[cellIndex];
+            formatCell(tf, cellIndex, cell);
+        });
+    }
+
+    // Format passed cell with custom logic
+    function formatCell(tf, cellIndex, cell){
+        if(cellIndex !== 3){
+            return;
+        }
+        var cellData = parseInt(cell.innerHTML, 10);
+
+        // some rows do not contain a numeric value
+        if(isNaN(cellData)){
+            return;
+        }
+
+        if(cellData >= 100000){
+            cell.style.backgroundColor = '#ff0000';
+        } else if(cellData < 100000 && cellData >= 50000) {
+            cell.style.backgroundColor = '#3399ff';
+        } else {
+            cell.style.backgroundColor = '#cfff33';
+        }
+    }
+</script>
+
+{{> code-tabs }}

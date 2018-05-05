@@ -1,0 +1,25 @@
+---
+title: Alternating rows
+heading: 'Alternating rows'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Enable alternating background rows with the <code>alternate_rows</code>
+    option.
+</p>
+
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        alternate_rows: true
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

@@ -1,0 +1,56 @@
+---
+title: Sort
+heading: 'Sort'
+section: 'examples-extension'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This exmaple shows how to configure the <code>sort</code> extension with a
+    table containing columns with different data types.
+</p>
+
+{{> data-types-table}}
+
+{{> tablefilter-script }}
+
+<script data-config>
+var tfConfig = {
+    base_path: './tablefilter/',
+    alternate_rows: true,
+    rows_counter: {
+        text: 'Users: '
+    },
+    btn_reset: {
+        text: 'Clear'
+    },
+    loader: true,
+    no_results_message: true,
+
+    // columns data types
+    col_types: [
+        'string',
+        'string',
+        'string',
+        { type: 'formatted-number', decimal: ',', thousands: '.' },
+        'formatted-number', // defaults to '.' for decimal and ',' for thousands
+        'string',
+        { type: 'date', locale: 'fr' },
+        { type: 'date', locale: 'en-US' },
+        { type: 'date', locale: 'en-US', format: ['{dd}-{months}-{yyyy|yy}'] },
+        'ipaddress'
+    ],
+
+    // Sort extension: in this example the column data types are provided by the
+    // 'col_types' property. The sort extension also has a 'types' property
+    // defining the columns data type for column sorting. If the 'types'
+    // property is not defined, the sorting extension will fallback to
+    // the 'col_types' definitions.
+    extensions: [{ name: 'sort' }]
+};
+var tf = new TableFilter('data-types', tfConfig);
+tf.init();
+</script>
+
+{{> code-tabs }}

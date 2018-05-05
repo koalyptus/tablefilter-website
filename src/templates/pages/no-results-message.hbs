@@ -1,0 +1,29 @@
+---
+title: No results message
+heading: 'No results message'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    Enable a specific message for searches yielding no matches with the
+    <code>no_results_message</code> configuration option.
+</p>
+
+<div class="alert alert-info" role="alert">
+    Search for <code>foo</code> in any column to get a no results message.
+</div>
+
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        no_results_message: true
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

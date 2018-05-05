@@ -1,0 +1,40 @@
+---
+title: Setup RequireJS
+heading: 'Setup with RequireJS'
+section: 'examples-setup'
+---
+
+<h1>{{heading}}</h1>
+
+<p>
+    For AMD enabled projects, this example shows how to load
+    the <code>TableFilter</code> module asynchronously with RequireJS.
+</p>
+
+{{> cities-table }}
+
+<!-- RequiresJS -->
+<div data-config>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+</div>
+
+<script data-config>
+// AMD example
+requirejs(['./tablefilter/tablefilter'], function(mod) {
+        var TableFilter = mod.TableFilter;
+        var tfConfig = {
+            base_path: 'tablefilter/',
+            alternate_rows: true,
+            rows_counter: true,
+            btn_reset: true
+        };
+        var tf = new TableFilter(
+            document.querySelector('.cities'),
+            tfConfig
+        );
+        tf.init();
+    }
+);
+</script>
+
+{{> code-tabs }}

@@ -1,0 +1,48 @@
+---
+title: Filters visibility extension with external toggle button
+heading: 'Filters visibility extension with external toggle button'
+section: 'examples-extension'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    This demo features the filters visibility extension with an external toggle
+    button.
+</p>
+<div data-config>
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="tablefilter/style/tablefilter.css">
+
+  <div id="filtersToggle"></div>
+</div>
+
+{{> countries-by-continent }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        col_1: 'select',
+        col_widths: [
+            '75px', '200px', '200px',
+            '100px', '75px', '400px'
+        ],
+        grid_layout: true,
+        paging: true,
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        loader: true,
+        status_bar: true,
+        extensions: [{
+            name: 'filtersVisibility',
+            target_id: 'filtersToggle',
+            btn_html: '<button>Toggle filters<\/button>'
+        }]
+    };
+    var tf = new TableFilter('demo', tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}

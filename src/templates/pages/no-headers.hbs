@@ -1,0 +1,36 @@
+---
+title: No headers
+heading: 'No headers'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    This example shows how to configure <code>TableFilter</code> for tables
+    with no headers. The numeric parameter <code>0</code> instructs the
+    plugin to start filtering at the specified row index.
+</p>
+
+{{> cities-table-no-headers }}
+
+<p></p>
+
+<div class="alert alert-info" role="alert">
+    By default <code>TableFilter</code> starts filtering at row <code>1</code>
+    as it assumes row <code>0</code> being the headers row. Also note the
+    numeric parameter in the constructor refers to row indexes before the
+    filters row is applied.
+</div>
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter(
+        document.querySelector('#no-headers'),
+        0,
+        { base_path: 'tablefilter/' }
+    );
+    tf.init();
+</script>
+
+{{> code-tabs }}

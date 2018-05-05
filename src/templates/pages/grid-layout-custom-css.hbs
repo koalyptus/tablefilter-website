@@ -1,0 +1,114 @@
+---
+title: Grid layout with custom styles
+heading: 'Grid layout with custom styles'
+section: 'examples-custom'
+---
+<div data-config>
+  <link rel="stylesheet" type="text/css" href="tablefilter/style/tablefilter.css">
+</div>
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demos shows how to use some of the CSS options to customise a
+    <code>grid_layout</code> table type.
+</p>
+
+{{> dummy-table }}
+
+{{> tablefilter-script }}
+
+<style data-config>
+    /**
+     * Grid layout custom classes
+     */
+
+     /* main container */
+    .grd-main-cont{
+        overflow: hidden;
+        background-color: #f4f4f4;
+    }
+
+    /* headers container */
+    .grd-head-cont{
+        overflow: hidden;
+        background-color: #4A4A4A;
+    }
+
+    /* header cell */
+    .grd-head-cont th{
+        background-color: #4A4A4A;
+        padding: 0.5em;
+        color: #fff;
+        border-right: 1px dotted #fff;
+        height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* table container */
+    .grd-cont{
+        background-color: #f4f4f4;
+        overflow-x: auto;
+        overflow-y: scroll;
+    }
+
+    /* cell */
+    .grd-cont td{
+        padding: 0.5em 0.5em;
+        border-bottom: 1px solid #ccc;
+        border-right: 1px dotted #666;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* head and body tables */
+    .grd-head-cont table, .grd-cont table{
+        font-size: 1.1em;
+        border-collapse: collapse;
+    }
+
+    /* bottom toolbar override */
+    .grd-main-cont > .grd_inf {
+        background-color: #ccc;
+        border-top: 1px solid #999;
+    }
+</style>
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        col_widths: [
+            '200px','60px','125px',
+            '100px','250px','100px'
+        ],
+        col_types: [
+            'string', 'number', 'string',
+            'number', 'string', 'date'
+        ],
+        alternate_rows: true,
+        rows_counter: true,
+        loader: true,
+
+        // grid layout customisation
+        grid_layout: {
+            width: '890px',
+            height: '400px',
+            filters: false,
+            cont_css_class: 'grd-main-cont',
+            tbl_head_css_class: 'grd-head-cont',
+            tbl_cont_css_class: 'grd-cont'
+        },
+
+        extensions:[{
+            name: 'sort'
+        }]
+    };
+    var tf = new TableFilter(
+        document.querySelector('.dummy'),
+        tfConfig
+    );
+    tf.init();
+</script>
+
+{{> code-tabs }}

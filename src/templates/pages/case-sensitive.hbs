@@ -1,0 +1,30 @@
+---
+title: Case sensitive match
+heading: 'Case sensitive match'
+section: 'examples-basic'
+---
+
+<h1>{{ heading }}</h1>
+<p>
+    With the <code>case_sensitive</code> option, filtering becomes case
+    sensitive.
+</p>
+
+<div class="alert alert-info" role="alert">
+    In the first column, search for <code>syd</code> and then try
+    <code>Syd</code>.
+</div>
+
+{{> cities-table }}
+
+{{> tablefilter-script }}
+
+<script data-config>
+    var tf = new TableFilter('demo', {
+        base_path: 'tablefilter/',
+        case_sensitive: true
+    });
+    tf.init();
+</script>
+
+{{> code-tabs }}

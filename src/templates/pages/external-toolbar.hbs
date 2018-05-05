@@ -1,0 +1,67 @@
+---
+title: External toolbar
+heading: 'Generate an external toolbar'
+section: 'examples-custom'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    This demo shows how to generate the toolbar in a specified container
+    element.
+</p>
+
+<div data-config>
+  <div id="externalToolbar" class="navbar navbar-default navbar-form"></div>
+</div>
+
+{{> countries-table }}
+
+{{> tablefilter-script }}
+
+<style data-config>
+    /* toolbar override */
+    .inf{
+        margin-top: 10px;
+        background-color: transparent;
+        border: 0;
+    }
+</style>
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        toolbar: {
+          target_id: 'externalToolbar'
+        },
+        paging: {
+          results_per_page: ['Records: ', [10, 25, 50, 100]]
+        },
+        state: {
+          types: ['local_storage'],
+          filters: true,
+          page_number: true,
+          page_length: true
+        },
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+        col_0: 'select',
+        col_1: 'select',
+        col_2: 'select',
+        col_types: [
+            'string', 'string', 'number',
+            'number', 'number', 'number',
+            'number', 'number', 'number'
+        ],
+        extensions:[{
+            name: 'sort'
+        }]
+    };
+    var tf = new TableFilter(document.querySelector('#demo'), tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}
