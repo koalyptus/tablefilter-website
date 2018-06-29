@@ -20,6 +20,25 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Polyfills for IE -->
+    <script>
+      var loadedPolyfills = (function (window, Function) {
+        var namedPolyfills = [];
+
+        if(!window.Promise) {
+          document.write('<script src="//unpkg.com/es6-promise@3.2.1/dist/es6-promise.min.js"><\/script>');
+          namedPolyfills.push('window.Promise');
+        }
+
+        if(!Function.name) {
+          document.write('<script src="//unpkg.com/function.name-polyfill@latest/Function.name.js"><\/script>');
+          namedPolyfills.push('Function.name');
+        }
+
+        return namedPolyfills;
+      })(window, Function)
+    </script>
   </head>
   <body>
 
@@ -290,6 +309,27 @@ System.import('./tablefilter/tablefilter').then(function(mod) {
     );
     tf.init();
 });
+</script>
+
+<script>
+  (function(loadedPolyfills, document) {
+    if(loadedPolyfills.indexOf('window.Promise') !== -1) {
+      var msg = '<br><div class="alert alert-danger" role="alert">'
+        + 'Your browser does not support <code>Promise</code>.<br>'
+        + 'Use a polyfill to provide support for the missing language feature, eg:'
+        + '<pre>https://unpkg.com/es6-promise@3.2.1/dist/es6-promise.min.js</pre>'
+        + '</div>';
+        document.write(msg);
+    }
+    if(loadedPolyfills.indexOf('Function.name') !== -1) {
+      var msg = '<br><div class="alert alert-danger" role="alert">'
+        + 'Your browser does not support <code>Function.name</code>.<br>'
+        + 'Use a polyfill to provide support for the missing language feature, eg:'
+        + '<pre>https://unpkg.com/function.name-polyfill@latest/Function.name.js</pre>'
+        + '</div>';
+        document.write(msg);
+    }
+  })(loadedPolyfills, document)
 </script>
 
 <hr>

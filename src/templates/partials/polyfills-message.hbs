@@ -1,0 +1,20 @@
+<script>
+  (function(loadedPolyfills, document) {
+    if(loadedPolyfills.indexOf('window.Promise') !== -1) {
+      var msg = '<br><div class="alert alert-danger" role="alert">'
+        + 'Your browser does not support <code>Promise</code>.<br>'
+        + 'Use a polyfill to provide support for the missing language feature, eg:'
+        + '<pre>https://unpkg.com/es6-promise@3.2.1/dist/es6-promise.min.js</pre>'
+        + '</div>';
+        document.write(msg);
+    }
+    if(loadedPolyfills.indexOf('Function.name') !== -1) {
+      var msg = '<br><div class="alert alert-danger" role="alert">'
+        + 'Your browser does not support <code>Function.name</code>.<br>'
+        + 'Use a polyfill to provide support for the missing language feature, eg:'
+        + '<pre>https://unpkg.com/function.name-polyfill@latest/Function.name.js</pre>'
+        + '</div>';
+        document.write(msg);
+    }
+  })(loadedPolyfills, document)
+</script>
