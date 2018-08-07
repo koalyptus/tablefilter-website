@@ -39,6 +39,17 @@
         return namedPolyfills;
       })(window, Function)
     </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122390890-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122390890-1');
+</script>
+
   </head>
   <body>
 
@@ -58,6 +69,8 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <!-- you can exclude pages using {{#isnt}} helper: {{#isnt data.title 'Blog'}} -->
+        
+            
         
             
         
@@ -205,6 +218,9 @@
         </li>
         <li>
           <a href="./docs" target="_blank">Docs</a>
+        </li>
+        <li>
+          <a href="./donate.html">Donate!</a>
         </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -911,29 +927,7 @@ styling:
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-    <input type="hidden" name="cmd" value="_donations">
-    <input type="hidden" name="business" value="maxgug@hotmail.com">
-    <input type="hidden" name="lc" value="BM">
-    <input type="hidden" name="item_name" value="TableFilter">
-    <input type="hidden" name="no_note" value="0">
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHosted">
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
-</form>
-</p>
-          </li>
-          <li>
-            
-<a href="https://flattr.com/submit/auto?user_id=koalyptus&
-    url=https%3A%2F%2Fgithub.com%2Fkoalyptus%2FTablefilter">
-    <img src="https://api.flattr.com/button/flattr-badge-large.png"
-        alt="TableFilter - A Javascript library making HTML tables filterable
-        and a bit more" />
-</a>
-
+            <a href="./donate.html">Donate!</a>
           </li>
         </ul>
       </div>
@@ -982,14 +976,6 @@ styling:
     src="//s7.addthis.com/js/300/addthis_widget.js#pubid=maxgug"
     async="async"></script>
 
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-68429903-1', 'auto');
-  ga('send', 'pageview');
-</script>
   </body>
 </html>

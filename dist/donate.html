@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Alternating rows | TableFilter</title>
+    <title>Donate | TableFilter</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -232,237 +232,60 @@
 
       
 
-<h1>Alternating rows</h1>
+<h1>Donate</h1>
 <p>
-    Enable alternating background rows with the <code>alternate_rows</code>
-    option.
+  Thank you for your support!
 </p>
 
 
-<table id="demo" class="cities">
-    <thead>
-        <tr>
-            <th>From</th>
-            <th>Destination</th>
-            <th>Road Distance (km)</th>
-            <th>By Air (hrs)</th>
-            <th>By Rail (hrs)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Sydney</td>
-            <td>Adelaide</td>
-            <td>1412</td>
-            <td>1.4</td>
-            <td>25.3</td>
-        </tr>
-        <tr>
-            <td>Sydney</td>
-            <td>Brisbane</td>
-            <td>982</td>
-            <td>1.5</td>
-            <td>16</td>
-        </tr>
-        <tr>
-            <td>Sydney</td>
-            <td>Canberra</td>
-            <td>286</td>
-            <td>.6</td>
-            <td>4.3</td>
-        </tr>
-        <tr>
-            <td>Sydney</td>
-            <td>Melbourne</td>
-            <td>872</td>
-            <td>1.1</td>
-            <td>10.5</td>
-        </tr>
-        <tr>
-            <td>Adelaide</td>
-            <td>Perth</td>
-            <td>2781</td>
-            <td>3.1</td>
-            <td>38</td>
-        </tr>
-        <tr>
-            <td>Adelaide</td>
-            <td>Alice Springs</td>
-            <td>1533</td>
-            <td>2</td>
-            <td>20.25</td>
-        </tr>
-        <tr>
-            <td>Adelaide</td>
-            <td>Brisbane</td>
-            <td>2045</td>
-            <td>2.15</td>
-            <td>40</td>
-        </tr>
-    </tbody>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_donations">
+  <input type="hidden" name="business" value="maxgug@hotmail.com">
+  <input type="hidden" name="item_name" value="TableFilter">
+  <input type="hidden" name="no_shipping" value="0">
+  <input type="hidden" name="no_note" value="1">
+  <input type="hidden" name="lc" value="US">
+  <input type="hidden" name="currency_code" value="USD">
+  <input type="hidden" name="tax" value="0">
+  <input type="hidden" name="bn" value="PP-DonationsBF">
+  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <img border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1" alt="">
+</form>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Bitcoin</th>
+      <td class="badge">1AisDmLTJD2yGQZLAwFkf7KpVCNjTpeLiZ</td>
+    </tr>
+    <tr>
+      <th>Ethereum</th>
+      <td class="badge">0x82452AB449BabD4d136867B0AD686264f3188DFa</td>
+    </tr>
+    
+    <tr>
+      <th>Bitcoin Cash</th>
+      <td class="badge">1AisDmLTJD2yGQZLAwFkf7KpVCNjTpeLiZ</td>
+    </tr>
+    <tr>
+      <th>Ethereum Classic</th>
+      <td class="badge">0x82452AB449BabD4d136867B0AD686264f3188DFa</td>
+    </tr>
+    <tr>
+      <th>Litecoin</th>
+      <td class="badge">LUwpUyeHNsH2XDFVM5F3w8PahQk1YSpET9</td>
+    </tr>
+  </tbody>
 </table>
 
-
-
-<script src="tablefilter/tablefilter.js"></script>
-
-
-<script data-config>
-    var tf = new TableFilter('demo', {
-        base_path: 'tablefilter/',
-        alternate_rows: true
-    });
-    tf.init();
-</script>
-
-<script>
-  (function(loadedPolyfills, document) {
-    if(loadedPolyfills.indexOf('window.Promise') !== -1) {
-      var msg = '<br><div class="alert alert-danger" role="alert">'
-        + 'Your browser does not support <code>Promise</code>.<br>'
-        + 'Use a polyfill to provide support for the missing language feature, eg:'
-        + '<pre>https://unpkg.com/es6-promise@3.2.1/dist/es6-promise.min.js</pre>'
-        + '</div>';
-        document.write(msg);
-    }
-    if(loadedPolyfills.indexOf('Function.name') !== -1) {
-      var msg = '<br><div class="alert alert-danger" role="alert">'
-        + 'Your browser does not support <code>Function.name</code>.<br>'
-        + 'Use a polyfill to provide support for the missing language feature, eg:'
-        + '<pre>https://unpkg.com/function.name-polyfill@latest/Function.name.js</pre>'
-        + '</div>';
-        document.write(msg);
-    }
-  })(loadedPolyfills, document)
-</script>
-
-<hr>
-<ul class="nav nav-pills">
-    <li class="active">
-        <a data-toggle="tab" href="#js">JS</a>
-    </li>
-    <li>
-        <a data-toggle="tab" href="#html">HTML</a>
-    </li>
-    <li>
-        <a data-toggle="tab" href="#css">CSS</a>
-    </li>
-</ul>
-
-<div class="tab-content">
-    <div id="js" class="tab-pane fade in active">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-    DO NOT COPY: NOT PART OF TABLEFILTER
--->
-<pre class="js">
-  <code class="javascript"></code>
-</pre>
-<script src="assets/js/js-code-in-pre.js"></script>
-<!-- -->
-
-
-
-
-
-    </div>
-    <div id="html" class="tab-pane fade">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-    DO NOT COPY: NOT PART OF TABLEFILTER
--->
-<pre class="html">
-  <code class="xml"></code>
-</pre>
-<script src="assets/js/html-code-in-pre.js"></script>
-<!-- -->
-
-
-
-
-
-    </div>
-    <div id="css" class="tab-pane fade">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-    DO NOT COPY: NOT PART OF TABLEFILTER
--->
-<pre class="css">
-  <code class="css"></code>
-</pre>
-<script src="assets/js/css-code-in-pre.js"></script>
-<!-- -->
-
-
-
-
-
-    </div>
-</div>
-
+<p>&nbsp;</p>
 
 
     </div>
