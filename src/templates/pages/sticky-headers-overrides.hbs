@@ -1,0 +1,54 @@
+---
+title: Sticky headers with overrides
+heading: 'Sticky headers with overrides'
+section: 'examples-custom'
+---
+
+<h1>{{ heading }}</h1>
+
+<p>
+    In particular page setups, sticky headers can be hidden by other page
+    elements implementing a similar behaviour. In this website, default sticky
+    headers are hidden by the header at the top of the page. This is an example
+    showing how to override the default <code>sticky</code> CSS class used to
+    create sticky headers.
+</p>
+
+<div class="alert alert-info" role="alert">
+    Check the style definitions in the CSS tab at the bottom of the page.
+</div>
+
+{{> countries-table-tiny }}
+
+{{> tablefilter-script }}
+
+<style data-config>
+    /** sticky headers overrides example */
+    .TF.sticky th {
+        /* override to position sticky headers underneath page header element */
+        top: 51px !important;
+    }
+</style>
+
+<script data-config>
+    var tfConfig = {
+        base_path: 'tablefilter/',
+        sticky_headers: true,
+        col_widths: [
+            "180px", "120px", "120px",
+            null, null, null,
+            null, null, null
+        ],
+        alternate_rows: true,
+        rows_counter: true,
+        btn_reset: true,
+        status_bar: true,
+        col_0: 'multiple',
+        col_1: 'select',
+        col_2: 'checklist'
+    };
+    var tf = new TableFilter('demo', tfConfig);
+    tf.init();
+</script>
+
+{{> code-tabs }}
