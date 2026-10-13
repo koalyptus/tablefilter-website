@@ -71,7 +71,6 @@ module.exports = function(grunt) {
           layout: '<%= config.src %>/templates/layouts/default.hbs',
           data: '<%= config.src %>/data/*.{json,yml}',
           partials: '<%= config.src %>/templates/partials/*.hbs',
-          plugins: ['assemble-contrib-anchors','assemble-contrib-toc'],
         },
         files: {
           '<%= config.dist %>/': ['<%= config.src %>/templates/pages/*.hbs']
@@ -82,7 +81,7 @@ module.exports = function(grunt) {
     copy: {
       bootstrap: {
         expand: true,
-        cwd: 'bower_components/bootstrap/dist/',
+        cwd: 'node_modules/bootstrap/dist/',
         src: '**',
         dest: '<%= config.dist %>/assets/'
       },

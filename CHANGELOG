@@ -1,3 +1,11 @@
+v0.4.0:
+  date: "2026-10-13"
+  changes:
+    - Updated build dependencies to their current releases (Grunt 1.x, grunt-contrib-clean/connect/copy/watch, grunt-gh-pages, load-grunt-tasks, time-grunt)
+    - Replaced Bower with the npm bootstrap package (bootstrap 3.4.1)
+    - Removed unused scaffolding dependencies (yo, generator-assemble) and dead assemble plugin references
+    - Added coffeescript, required by Grunt 1.x to load the legacy handlebars-helpers dependency
+
 v0.1.0:
   date: "2015-09-05"
   changes:
