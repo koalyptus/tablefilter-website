@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    ignore:
+      # assemble 0.24.x is a different tool: it is not a Grunt plugin and
+      # registers no `assemble` task, so `grunt.loadNpmTasks('assemble')` fails
+      # and the build aborts (this broke the S3 deploy via #16). The templates
+      # and Gruntfile are written against the 0.4 grunt-plugin API.
+      - dependency-name: "assemble"
+        versions: [">=0.5.0"]
