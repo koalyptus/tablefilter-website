@@ -82,11 +82,17 @@ module.exports = function(grunt) {
       bootstrap: {
         expand: true,
         cwd: 'node_modules/bootstrap/dist/',
-        // only the assets the site references: the minified stylesheet, the
-        // theme stylesheet, the plugin bundle and the glyphicon fonts
+        // the assets the site references (minified css/theme/js + glyphicon
+        // fonts), plus the unminified stylesheets, source maps and js bundle
+        // that were already published under /assets before this change
         src: [
+          'css/bootstrap.css',
+          'css/bootstrap.css.map',
+          'css/bootstrap-theme.css',
+          'css/bootstrap-theme.css.map',
           'css/bootstrap.min.css',
           'css/bootstrap-theme.min.css',
+          'js/bootstrap.js',
           'js/bootstrap.min.js',
           'fonts/*'
         ],
