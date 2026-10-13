@@ -71,7 +71,6 @@ module.exports = function(grunt) {
           layout: '<%= config.src %>/templates/layouts/default.hbs',
           data: '<%= config.src %>/data/*.{json,yml}',
           partials: '<%= config.src %>/templates/partials/*.hbs',
-          plugins: ['assemble-contrib-anchors','assemble-contrib-toc'],
         },
         files: {
           '<%= config.dist %>/': ['<%= config.src %>/templates/pages/*.hbs']
@@ -82,8 +81,21 @@ module.exports = function(grunt) {
     copy: {
       bootstrap: {
         expand: true,
-        cwd: 'bower_components/bootstrap/dist/',
-        src: '**',
+        cwd: 'node_modules/bootstrap/dist/',
+        // the assets the site references (minified css/theme/js + glyphicon
+        // fonts), plus the unminified stylesheets, source maps and js bundle
+        // that were already published under /assets before this change
+        src: [
+          'css/bootstrap.css',
+          'css/bootstrap.css.map',
+          'css/bootstrap-theme.css',
+          'css/bootstrap-theme.css.map',
+          'css/bootstrap.min.css',
+          'css/bootstrap-theme.min.css',
+          'js/bootstrap.js',
+          'js/bootstrap.min.js',
+          'fonts/*'
+        ],
         dest: '<%= config.dist %>/assets/'
       },
       theme: {
