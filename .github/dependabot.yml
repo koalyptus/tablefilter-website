@@ -11,3 +11,10 @@ updates:
       # and Gruntfile are written against the 0.4 grunt-plugin API.
       - dependency-name: "assemble"
         versions: [">=0.5.0"]
+      # The site is built against Bootstrap 3: every page loads
+      # bootstrap-theme.min.css and js/bootstrap.min.js, and the copy:bootstrap
+      # task names both. Bootstrap 4/5 dropped the theme stylesheet, the
+      # glyphicon fonts and bootstrap.min.js (renamed bootstrap.bundle.min.js),
+      # so a major bump would break the build and strip the styling.
+      - dependency-name: "bootstrap"
+        versions: [">=4.0.0"]
