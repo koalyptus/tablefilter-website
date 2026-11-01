@@ -21,7 +21,7 @@
   "devDependencies": {
     "assemble": "^0.4.42",
     "bootstrap": "3.4.1",
-    "coffeescript": "^2.7.0",
+    "coffeescript": "^2.7.1",
     "grunt": "^1.6.3",
     "grunt-contrib-clean": "^2.0.1",
     "grunt-contrib-connect": "^5.0.1",
