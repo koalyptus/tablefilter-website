@@ -82,16 +82,11 @@ section: 'examples-extension'
         extensions: [
             {
                 name: 'advancedGrid',
-                // For the purpose of this demo, ezEditTable dependency
-                // is loaded from its own website which is not a CDN.
-                // This dependency also requires a licence therefore
-                // DO NOT import it in this way in your projects.
-                filename: 'ezEditTable_min.js',
-                vendor_path: 'http://edittable.free.fr/ezEditTable/',
                 // Once ezEditTable dependency is installed in your
                 // project import it by pointing to a local path:
                 // vendor_path: 'path/to/ezEditTable'
-
+                filename: 'ezEditTable.js',
+                vendor_path: 'ezEditTable/',
                 // Below ezEditTable options for activating:
                 // - row(s)/cell(s) selection
                 selection: true,

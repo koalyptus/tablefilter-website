@@ -28,19 +28,19 @@ section: 'examples-extension'
             var advancedGrid = tf.extension('advancedGrid');
             var ezEditTable = advancedGrid._ezEditTable;
             ezEditTable.Editable.Edit();">
-            <img src="http://edittable.free.fr/ezEditTable/themes/icn_edit.gif" alt="Edit record">
+            <img src="ezEditTable/themes/icn_edit.gif" alt="Edit record">
         </button>
         <button onclick="
             var advancedGrid = tf.extension('advancedGrid');
             var ezEditTable = advancedGrid._ezEditTable;
             ezEditTable.Editable.AddNewRow();">
-            <img src="http://edittable.free.fr/ezEditTable/themes/icn_add.gif" alt="Add record">
+            <img src="ezEditTable/themes/icn_add.gif" alt="Add record">
         </button>
         <button onclick="
             var advancedGrid = tf.extension('advancedGrid');
             var ezEditTable = advancedGrid._ezEditTable;
             ezEditTable.Editable.SubmitDeletedRows();">
-            <img src="http://edittable.free.fr/ezEditTable/themes/icn_del.gif" alt="Delete record">
+            <img src="ezEditTable/themes/icn_del.gif" alt="Delete record">
         </button>
     </div>
 </div>
@@ -86,16 +86,11 @@ section: 'examples-extension'
         extensions:[
             {
                 name: 'advancedGrid',
-                // For the purpose of this demo, ezEditTable dependency
-                // is loaded from its own website which is not a CDN.
-                // This dependency also requires a licence therefore
-                // DO NOT import it in this way in your projects.
-                filename: 'ezEditTable_min.js',
-                vendor_path: 'http://edittable.free.fr/ezEditTable/',
                 // Once ezEditTable dependency is installed in your
                 // project import it by pointing to a local path:
                 // vendor_path: 'path/to/ezEditTable'
-
+                filename: 'ezEditTable.js',
+                vendor_path: 'ezEditTable/',
                 // Below ezEditTable options for activating:
                 // - row/cells selection
                 // - cell inline edition
