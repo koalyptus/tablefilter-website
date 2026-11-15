@@ -116,6 +116,12 @@ module.exports = function(grunt) {
         src: '**',
         dest: '<%= config.dist %>/tablefilter/'
       },
+      ezEditTable: {
+        expand: true,
+        cwd: 'ezEditTable/',
+        src: '**',
+        dest: '<%= config.dist %>/ezEditTable/'
+      },
       libs: {
         expand: true,
         cwd: 'libs/',

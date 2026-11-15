@@ -3,7 +3,7 @@ title: Editable grids
 heading: 'Editable grids'
 ---
 <link rel="stylesheet" type="text/css" href="tablefilter/style/tablefilter.css">
-<script src="http://edittable.free.fr/ezEditTable/ezEditTable_min.js"></script>
+<script src="ezEditTable/ezEditTable.js"></script>
 
 <h1>{{ heading }}</h1>
 
@@ -30,13 +30,13 @@ heading: 'Editable grids'
               var advancedGrid = tf1.extension('advancedGrid');
               var ezEditTable = advancedGrid._ezEditTable;
               ezEditTable.Editable.Edit();">
-              <img src="http://edittable.free.fr/ezEditTable/themes/icn_edit.gif" alt="Edit record">
+              <img src="ezEditTable/themes/icn_edit.gif" alt="Edit record">
           </button>
           <button onclick="
               var advancedGrid = tf1.extension('advancedGrid');
               var ezEditTable = advancedGrid._ezEditTable;
               ezEditTable.Editable.AddNewRow();">
-              <img src="http://edittable.free.fr/ezEditTable/themes/icn_add.gif" alt="Add record">
+              <img src="ezEditTable/themes/icn_add.gif" alt="Add record">
           </button>
       </div>
   </div>
@@ -51,13 +51,13 @@ heading: 'Editable grids'
               var advancedGrid = tf2.extension('advancedGrid');
               var ezEditTable = advancedGrid._ezEditTable;
               ezEditTable.Editable.Edit();">
-              <img src="http://edittable.free.fr/ezEditTable/themes/icn_edit.gif" alt="Edit record">
+              <img src="ezEditTable/themes/icn_edit.gif" alt="Edit record">
           </button>
           <button onclick="
               var advancedGrid = tf2.extension('advancedGrid');
               var ezEditTable = advancedGrid._ezEditTable;
               ezEditTable.Editable.AddNewRow();">
-              <img src="http://edittable.free.fr/ezEditTable/themes/icn_add.gif" alt="Add record">
+              <img src="ezEditTable/themes/icn_add.gif" alt="Add record">
           </button>
       </div>
     </div>
@@ -71,7 +71,7 @@ heading: 'Editable grids'
     If your page contains multiple editable grids it is required to manually import
     the {{{site.ezedittable_link}}} plugin: <br>
     <code>
-      &lt;script src="your/local/path/to/ezEditTable/ezEditTable_min.js"&gt;&lt;/script&gt;
+      &lt;script src="ezEditTable/ezEditTable.js"&gt;&lt;/script&gt;
     </code>
 </div>
 
