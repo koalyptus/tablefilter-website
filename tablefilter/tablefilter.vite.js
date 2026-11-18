@@ -10449,7 +10449,7 @@
 			let name = this.getCEName(colIndex);
 			let count = (this.ceValues[colIndex] || []).filter((value) => value !== "").length;
 			host.setAttribute("trigger-text", count ? `${name} (${count})` : name);
-			host.setAttribute("listbox-label", `${name} options`);
+			host.setAttribute("accessible-listbox-label", `${name} options`);
 		}
 		/**
 		* Return the trigger name for a column: its header text, or a
@@ -10524,7 +10524,7 @@
 			if (!tf.loadFltOnDemand) this.build(colIndex);
 			else {
 				host.setAttribute("trigger-text", this.activateText);
-				host.setAttribute("listbox-label", `${this.activateText} options`);
+				host.setAttribute("accessible-listbox-label", `${this.activateText} options`);
 			}
 		}
 		/**
@@ -15212,7 +15212,7 @@
 			const host = document.createElement("tf-help");
 			host.setAttribute("trigger-text", this.btnText);
 			host.setAttribute("close-text", "Close");
-			if (this.label) host.setAttribute("label", this.label);
+			if (this.label) host.setAttribute("accessible-label", this.label);
 			if (this.btnHtml) {
 				const trigger = createElm("span");
 				trigger.innerHTML = sanitizeHtml(this.btnHtml);
@@ -17516,7 +17516,7 @@
 			cont.className = this.cssClass;
 			if (this.text) cont.setAttribute("text", this.text);
 			if (this.tooltip) {
-				cont.setAttribute("label", this.tooltip);
+				cont.setAttribute("accessible-label", this.tooltip);
 				cont.setAttribute("title", this.tooltip);
 			}
 			targetEl.appendChild(cont);
@@ -18682,7 +18682,7 @@
 			* Current version
 			* @type {String}
 			*/
-			this.version = "0.7.10";
+			this.version = "0.7.11";
 			/**
 			* Current year
 			* @type {Number}
