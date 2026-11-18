@@ -18682,7 +18682,7 @@
 			* Current version
 			* @type {String}
 			*/
-			this.version = "0.7.9";
+			this.version = "0.7.10";
 			/**
 			* Current year
 			* @type {Number}
