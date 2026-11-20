@@ -16459,27 +16459,80 @@
 			* @type {Function}
 			*/
 			this.onHide = defaultsFn(f.on_hide_loader, EMPTY_FN);
+			/**
+			* Subscribed before-action handler
+			* @type {Function|null}
+			* @private
+			*/
+			this.boundShow = null;
+			/**
+			* Subscribed after-action handler
+			* @type {Function|null}
+			* @private
+			*/
+			this.boundHide = null;
 		}
 		/**
 		* Initializes Loader instance
 		*/
 		init() {
 			if (this.initialized) return;
-			let tf = this.tf;
-			let emitter = this.emitter;
+			const targetEl = this.targetId ? elm(this.targetId) : null;
+			if (this.canUseCE(targetEl)) this.initCE(targetEl);
+			else this.initLegacy(targetEl);
+			this.show(NONE);
+			this.boundShow = () => this.show("");
+			this.boundHide = () => this.show(NONE);
+			this.emitter.on(BEFORE_ACTION_EVENTS, this.boundShow);
+			this.emitter.on(AFTER_ACTION_EVENTS, this.boundHide);
+			/** @inherited */
+			this.initialized = true;
+		}
+		/**
+		* Whether the feature renders through `<tf-loader>`.
+		* @param {DOMElement} targetEl Resolved `target_id` container, if any
+		* @returns {Boolean} True when the registered element exposes `setText`,
+		* the configuration keeps the default `loader` class and a configured
+		* `target_id` resolves
+		* @private
+		*/
+		canUseCE(targetEl) {
+			const LoaderElement = typeof customElements === "undefined" ? null : customElements.get("tf-loader");
+			return Boolean(LoaderElement) && typeof LoaderElement.prototype.setText === "function" && this.cssClass === "loader" && (!this.targetId || Boolean(targetEl));
+		}
+		/**
+		* Initialize using the <tf-loader> custom element
+		* @param {DOMElement} targetEl Target container element
+		* @private
+		*/
+		initCE(targetEl) {
+			const host = document.createElement("tf-loader");
+			host.className = this.cssClass;
+			host.setText(this.html ? "" : this.text);
+			if (this.html) host.innerHTML = sanitizeHtml(this.html);
+			if (targetEl) targetEl.appendChild(host);
+			else {
+				const dom = this.tf.dom();
+				dom.parentNode.insertBefore(host, dom);
+			}
+			this.cont = host;
+		}
+		/**
+		* Initialize using the legacy div container
+		* @param {DOMElement} targetEl Target container element
+		* @private
+		*/
+		initLegacy(targetEl) {
 			let containerDiv = createElm("div");
 			containerDiv.className = this.cssClass;
-			let targetEl = !this.targetId ? tf.dom().parentNode : elm(this.targetId);
-			if (!this.targetId) targetEl.insertBefore(containerDiv, tf.dom());
-			else targetEl.appendChild(containerDiv);
+			if (targetEl) targetEl.appendChild(containerDiv);
+			else {
+				const dom = this.tf.dom();
+				dom.parentNode.insertBefore(containerDiv, dom);
+			}
 			this.cont = containerDiv;
 			if (!this.html) this.cont.appendChild(createText(this.text));
 			else this.cont.innerHTML = this.html;
-			this.show(NONE);
-			emitter.on(BEFORE_ACTION_EVENTS, () => this.show(""));
-			emitter.on(AFTER_ACTION_EVENTS, () => this.show(NONE));
-			/** @inherited */
-			this.initialized = true;
 		}
 		/**
 		* Shows or hides activity indicator
@@ -16502,10 +16555,12 @@
 		destroy() {
 			if (!this.initialized) return;
 			let emitter = this.emitter;
-			removeElm(this.cont);
+			if (this.cont && this.cont.parentNode) removeElm(this.cont);
 			this.cont = null;
-			emitter.off(BEFORE_ACTION_EVENTS, () => this.show(""));
-			emitter.off(AFTER_ACTION_EVENTS, () => this.show(NONE));
+			emitter.off(BEFORE_ACTION_EVENTS, this.boundShow);
+			emitter.off(AFTER_ACTION_EVENTS, this.boundHide);
+			this.boundShow = null;
+			this.boundHide = null;
 			this.initialized = false;
 		}
 	};
@@ -18682,7 +18737,7 @@
 			* Current version
 			* @type {String}
 			*/
-			this.version = "0.7.11";
+			this.version = "0.7.12";
 			/**
 			* Current year
 			* @type {Number}
