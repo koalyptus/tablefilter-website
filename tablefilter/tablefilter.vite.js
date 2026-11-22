@@ -18737,7 +18737,7 @@
 			* Current version
 			* @type {String}
 			*/
-			this.version = "0.7.12";
+			this.version = "0.7.13";
 			/**
 			* Current year
 			* @type {Number}
@@ -19440,10 +19440,21 @@
 			this.instantiateFeatures(FEATURES);
 		}
 		/**
+		* Throws when the table is not attached to the document.
+		* @private
+		*/
+		assertTableAttached() {
+			const rootEl = doc.documentElement;
+			if (!rootEl || !rootEl.contains(this.dom())) throw new Error(`Could not initialise TableFilter: the HTML table
+                is not attached to the document. Append it to the DOM before
+                init().`);
+		}
+		/**
 		* Initialise features and layout
 		*/
 		init() {
 			if (this.initialized) return;
+			this.assertTableAttached();
 			this.import(this.stylesheetId, this.getStylesheetPath(), null, "link");
 			let Mod = this.Mod;
 			let inpclass;
