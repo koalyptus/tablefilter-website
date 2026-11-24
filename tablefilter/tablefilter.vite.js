@@ -17717,6 +17717,7 @@
 	};
 	//#endregion
 	//#region src/modules/noResults.js
+	var TOGGLE_EVENTS = ["initialized", "after-filtering"];
 	/**
 	* UI when filtering yields no matches
 	* @export
@@ -17740,18 +17741,18 @@
 			* Custom container DOM element
 			* @type {DOMElement}
 			*/
-			this.customContainer = defaultsStr(f.custom_container, null);
+			this.customContainer = f.custom_container && typeof f.custom_container.appendChild === "function" ? f.custom_container : null;
 			/**
 			* ID of custom container element
 			* @type {String}
 			*/
 			this.customContainerId = defaultsStr(f.custom_container_id, null);
 			/**
-			* Indicates if UI is contained in a external element
+			* True when a container element is present or a container id is set
 			* @type {Boolean}
 			* @private
 			*/
-			this.isExternal = !isEmpty(this.customContainer) || !isEmpty(this.customContainerId);
+			this.isExternal = Boolean(this.customContainer) || Boolean(this.customContainerId);
 			/**
 			* Css class assigned to container element
 			* @type {String}
@@ -17782,23 +17783,67 @@
 			* @type {Function}
 			*/
 			this.onAfterHide = defaultsFn(f.on_after_hide_msg, EMPTY_FN);
+			/**
+			* Subscribed toggle handler
+			* @type {Function|null}
+			* @private
+			*/
+			this.boundToggle = null;
 		}
 		/**
 		* Initializes NoResults instance
 		*/
 		init() {
 			if (this.initialized) return;
-			let tf = this.tf;
-			let target = this.customContainer || elm(this.customContainerId) || tf.dom();
+			let targetEl = this.isExternal ? this.customContainer || elm(this.customContainerId) : null;
+			if (this.canUseCE(targetEl)) this.initCE(targetEl);
+			else this.initLegacy(targetEl);
+			this.boundToggle = () => this.toggle();
+			this.emitter.on(TOGGLE_EVENTS, this.boundToggle);
+			/** @inherited */
+			this.initialized = true;
+		}
+		/**
+		* Whether the feature renders through `<tf-no-results>`.
+		* @param {DOMElement} targetEl Resolved external container, if any
+		* @returns {Boolean} True when the registered element exposes `setText`
+		* and no external container is configured, or the container resolves
+		* @private
+		*/
+		canUseCE(targetEl) {
+			const NoResultsElement = typeof customElements === "undefined" ? null : customElements.get("tf-no-results");
+			return Boolean(NoResultsElement) && typeof NoResultsElement.prototype.setText === "function" && (!this.isExternal || Boolean(targetEl && typeof targetEl.appendChild === "function"));
+		}
+		/**
+		* Initialize using the <tf-no-results> custom element
+		* @param {DOMElement} targetEl External container element
+		* @private
+		*/
+		initCE(targetEl) {
+			const host = document.createElement("tf-no-results");
+			host.className = this.cssClass;
+			host.setText("");
+			host.innerHTML = sanitizeHtml(this.content);
+			if (this.isExternal) targetEl.appendChild(host);
+			else {
+				const dom = this.tf.dom();
+				dom.parentNode.insertBefore(host, dom.nextSibling);
+			}
+			this.cont = host;
+		}
+		/**
+		* Initialize using the legacy div container
+		* @param {DOMElement} targetEl External container element
+		* @private
+		*/
+		initLegacy(targetEl) {
+			let target = targetEl || this.tf.dom();
 			let cont = createElm("div");
 			cont.className = this.cssClass;
 			cont.innerHTML = this.content;
 			if (this.isExternal) target.appendChild(cont);
 			else target.parentNode.insertBefore(cont, target.nextSibling);
 			this.cont = cont;
-			this.emitter.on(["initialized", "after-filtering"], () => this.toggle());
-			/** @inherited */
-			this.initialized = true;
 		}
 		/**
 		* Toggle no results message
@@ -17841,9 +17886,12 @@
 		/** Remove feature */
 		destroy() {
 			if (!this.initialized) return;
-			removeElm(this.cont);
+			if (this.cont && this.cont.parentNode) removeElm(this.cont);
 			this.cont = null;
-			this.emitter.off(["after-filtering"], () => this.toggle());
+			if (this.boundToggle) {
+				this.emitter.off(TOGGLE_EVENTS, this.boundToggle);
+				this.boundToggle = null;
+			}
 			this.initialized = false;
 		}
 	};
@@ -18737,7 +18785,7 @@
 			* Current version
 			* @type {String}
 			*/
-			this.version = "0.7.13";
+			this.version = "0.7.14";
 			/**
 			* Current year
 			* @type {Number}
